@@ -13,8 +13,22 @@ var CMD = cc.Enum({
     GET_MATCH_RESULT: 2003,
     //请求题库
     GET_QUEST_BANK: 2004,
+    //请求亮题
+    GET_QUEST:2005,
+    //请求回答
+    ANSWER_QUEST:2006,
+    //请求答案
+    GET_ANSWER:2007,
+    //请求抢答
+    ROB_ANSWER:2008,
+    //请求答题信息
+    GET_ROOM_RESULT:2009,
     //请求历史题库
-    GET_HISTORY_QUESTION: 3000
+    GET_HISTORY_QUESTION: 3000,
+    //提交胜利
+    SUBMIT_VICTORY:2010,
+    //检查抢答状态
+    CHECK_ROB:2011
 });
 
 module.exports = CMD;

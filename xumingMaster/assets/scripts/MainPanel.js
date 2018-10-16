@@ -54,6 +54,8 @@ cc.Class({
         this.btn_robot.node.on("click", this.onPlayWithRobot, this);
         this.btn_challenge.node.on("click", this.onChallenge, this);
         this.node.on('onPassMatching',this.onPassMatching,this);
+        this.node.on('onCancelMatching',this.onCancelMatching,this);
+        
 
         GameManager.getInstance().callBack_matchSuc=this.OnMatchFinish;
         GameManager.getInstance().callBack_matchCheck=this.OnMatchCheckBack;
@@ -98,8 +100,30 @@ cc.Class({
     {
         this.OnMatchFinish();
     },
+    onCancelMatching(event)
+    {
+        var th=this;
+        GameManager.getInstance().CancelMatch(function(resp){
+            if(resp.toString() == "ok")
+            {
+                th.matchingBoard.node.active=false;
+                GameManager.getInstance().gameState=gameEnum.GAME_STATE.HOME;
+            }
+        });
+    },
     OnMatchFinish(resp)
     {
+        var length=resp.length;
+        for(var i=0;i<length;i++)
+        {
+            if(resp[i]['openId'] == GameManager.getInstance().myInfo.openId)
+            {
+                GameManager.getInstance().myInfo['side']=i;
+            }
+            else{
+                GameManager.getInstance().oppInfo={wxName:resp[i]['nickName'],iconUrl:'http://tinslychong.club/cocos/icon1.jpg',openId:i,side:i};
+            }
+        }
         this.matchingBoard.node.active=false;
         GameManager.getInstance().gameState=gameEnum.GAME_STATE.CHESS;
         cc.director.loadScene("game", function(){
@@ -110,7 +134,7 @@ cc.Class({
         console.log("checkMatching:"+resp['matchSuccess']);
         if(resp['matchSuccess'])
         {
-            th.OnMatchFinish('');
+            th.OnMatchFinish(resp['roles']);
         }
         
     },

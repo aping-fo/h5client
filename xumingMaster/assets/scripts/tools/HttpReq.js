@@ -39,6 +39,7 @@ var appScript = {
     },
 
     Post: function (cmd, reqData, callback) {
+        reqData = reqData == null?{}:reqData;
         var self = this;
         // console.log(url)
         // console.log(reqData)

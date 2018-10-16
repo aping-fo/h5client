@@ -1,4 +1,4 @@
-
+var GameManager = require("GameManager");
 cc.Class({
     extends: cc.Component,
 
@@ -21,11 +21,12 @@ cc.Class({
         },
         chesses:[cc.Sprite],
         chesses_marked:[],
-        testIndex:0,//当前选择格子index
+        winArr:null
     },
 
 
     onLoad () {
+        this.winArr=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
         this.chesses=new Array();
         this.chesses_marked=new Array();
         for(var i=0;i<9;i++)
@@ -54,26 +55,61 @@ cc.Class({
         this.chesses_marked.push(ran);
         this.chesses[ran].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame("what");
     },
-    OnNext(idx)
+    OnNext()
     {
-        this.chesses[idx].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame("what");
+        this.chesses[GameManager.getInstance().curQuestionIdx].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame("what");
+        
     },
     onChessClick(event){
-        this.testIndex=this.chesses.indexOf(event.target);
-        this.node.dispatchEvent( new cc.Event.EventCustom('onChessClick', true) );
+        var idx=this.chesses.indexOf(event.target);
+        if(idx == GameManager.getInstance().curQuestionIdx)
+        {
+            this.node.dispatchEvent( new cc.Event.EventCustom('onChessClick', true) );
+        }
+       
     },
     result(index,result)
     {
-        this.chesses[index].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame(result == 1?"o":"x");;
+        console.log(result)
+        this.chess es[index].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame(result == 1 ?"o":"x");;
     },
-    resultBySimulation(result)
+    setGrid()
     {
-        this.chesses[this.testIndex].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame(result == 1?"o":"x");
-        if( this.chesses_marked.length>=9)
+        var questions=GameManager.getInstance().questions;
+        var length=questions.length;
+        for(var i=0;i<length;i++)
         {
-            cc.director.loadScene("result", function(){
-            });
+            // this.chesses.
         }
+    },
+    CheckWin()
+    {
+        var length=this.winArr.length;
+        for(var i=0;i<length;i++)
+        {
+            var name=this.chesses[this.winArr[i][0]].getComponent(cc.Sprite).spriteFrame._name;
+            if(this.CheckIsSame(this.chesses[this.winArr[i][1]],name) && this.CheckIsSame(this.chesses[this.winArr[i][2]],name))
+            {
+                if(name == 'o')
+                {
+                    return GameManager.getInstance().myInfo['side'] == 0;
+                } 
+                if(name == 'x')
+                {
+                    return  GameManager.getInstance().myInfo['side'] == 1;
+                } 
+            }
+
+        }
+        return null;
+    },
+    CheckIsSame(gridA,name)
+    {
+        if(gridA.getComponent(cc.Sprite).spriteFrame == null)
+        {
+            return false;
+        }
+        return gridA.getComponent(cc.Sprite).spriteFrame._name == name;
     }
     // update (dt) {},
 });

@@ -22,6 +22,12 @@ var GameManager=cc.Class({
             default:null,
             type:Object,
         },
+        questions:
+        {
+            default:null,
+            type:{Object}
+        },
+        curQuestionIdx:-1,
         callBack_matchSuc:null,
         callBack_matchCheck:null,
       
@@ -55,6 +61,14 @@ var GameManager=cc.Class({
             callback(resp);
         });
     },
+    //取消匹配
+    CancelMatch(callback)
+    {
+        var data={};
+        httpReq.Post(CMD.END_MATCH,data,function(resp){
+            callback(resp);
+        });
+    },
     //检查是否匹配到人
     CheckMatch()
     {
@@ -73,41 +87,82 @@ var GameManager=cc.Class({
      {
         var data={};
         httpReq.Post(CMD.GET_QUEST_BANK,data,function(resp){
-            callback();
+            callback(resp);
         });
      },
-      //请求棋盘
-      GetChessBoardInfo(callback)
-      {
-         var data={};
-         httpReq.Post(CMD.GET_QUEST_BANK,data,function(resp){
-             callback();
-         });
-      },
-       //请求下一个棋子
+       //请求亮题
        GetNext(callback)
        {
           var data={};
-          httpReq.Post(CMD.GET_QUEST_BANK,data,function(resp){
-              callback();
+          httpReq.Post(CMD.GET_QUEST,data,function(resp){
+              callback(resp);
           });
+       },
+       //检查下一轮是否开始
+       CheckNextRound(callback)
+       {
+        var data={};
+        httpReq.Post(CMD.GET_QUEST,data,function(resp){
+            callback(resp);
+        });
        },
          //抢棋子
          GrabChess(idx,callback)
          {
             var data={};
-            httpReq.Post(CMD.GET_QUEST_BANK,data,function(resp){
-                callback();
+            httpReq.Post(CMD.ROB_ANSWER,data,function(resp){
+                callback(resp);
             });
          },
           //选择答案
           SendAnswer(idx,callback)
           {
-             var data={};
-             httpReq.Post(CMD.GET_QUEST_BANK,data,function(resp){
-                 callback();
+             var data={answer:idx};
+             httpReq.Post(CMD.ANSWER_QUEST,data,function(resp){
+                 callback(resp);
              });
-          }
+          },
+           //获得正确答案
+           GetAnswer(cfgid,callback)
+           {
+              var data={cfgId:cfgid};
+              httpReq.Post(CMD.GET_ANSWER,data,function(resp){
+                  callback(resp);
+              });
+           },
+            //提交胜利
+            SubmitVictory(callback)
+            {
+               var data={};
+               httpReq.Post(CMD.SUBMIT_VICTORY,data,function(resp){
+                   callback(resp);
+               });
+            },
+             //获取当前棋盘状态
+             GetRoomResult(callback)
+             {
+                var data={};
+                httpReq.Post(CMD.GET_ROOM_RESULT,data,function(resp){
+                    callback(resp);
+                });
+             },
+            //请求题库
+     GetQuestBank(callback)
+     {
+        var data={};
+        httpReq.Post(CMD.GET_QUEST_BANK,data,function(resp){
+            callback(resp);
+        });
+     },
+
+      //检查是否被抢
+      GetRobState(callback)
+      {
+         var data={};
+         httpReq.Post(CMD.CHECK_ROB,data,function(resp){
+             callback(resp);
+         });
+      },
    
 });
 GameManager._instance = null;
