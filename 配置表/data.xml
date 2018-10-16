@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<items>
+  <config>
+	<item client="LevelCfg" server="LevelCfg" file="d等级" /> 
+	<item client="QuestionCfg" server="QuestionCfg" file="t题库" /> 
+  </config>
+</items>

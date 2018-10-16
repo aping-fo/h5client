@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<items>
+  <svn_url>192.168.0.200:21050</svn_url>
+  <server_xml_url>http://192.168.0.200:21050/svn/proj02_server/h5/medicine/server/data </server_xml_url>
+  <server_file_url>http://192.168.0.200:21050/svn/proj02_server/h5/medicine/server/src/com/game/data </server_file_url>
+  <svn_client_file></svn_client_file>
+  <svn_client_data></svn_client_data>
+  <svn_client_bundle></svn_client_bundle>
+  <server_proto_url></server_proto_url>
+  <client_proto_url></client_proto_url>
+  <client_lua_proto_url></client_lua_proto_url>
+  <svn>C:\Program Files\TortoiseSVN\bin</svn>
+  <client_path>E:\workspace\wechat_game\wechat_game_medicine\</client_path>
+  <local_data_path>E:\workspace\wechat_game\wechat_game_medicine\配置表\</local_data_path>
+</items>

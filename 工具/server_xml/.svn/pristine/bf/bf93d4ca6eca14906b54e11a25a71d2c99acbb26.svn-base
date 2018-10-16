@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<config>
+	<id>1</id>
+	<level>1</level>
+	<levelName>初学者</levelName>
+	<levelUpScore>15</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>1</difficultyMin>
+	<difficultyMax>1</difficultyMax>
+</config>
+<config>
+	<id>2</id>
+	<level>2</level>
+	<levelName>入门1段</levelName>
+	<levelUpScore>50</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>1</difficultyMin>
+	<difficultyMax>2</difficultyMax>
+</config>
+<config>
+	<id>3</id>
+	<level>3</level>
+	<levelName>入门2段</levelName>
+	<levelUpScore>100</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>1</difficultyMin>
+	<difficultyMax>2</difficultyMax>
+</config>
+<config>
+	<id>4</id>
+	<level>4</level>
+	<levelName>入门3段</levelName>
+	<levelUpScore>150</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>1</difficultyMin>
+	<difficultyMax>2</difficultyMax>
+</config>
+<config>
+	<id>5</id>
+	<level>5</level>
+	<levelName>学者1段</levelName>
+	<levelUpScore>200</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>2</difficultyMin>
+	<difficultyMax>3</difficultyMax>
+</config>
+<config>
+	<id>6</id>
+	<level>6</level>
+	<levelName>学者2段</levelName>
+	<levelUpScore>250</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>2</difficultyMin>
+	<difficultyMax>3</difficultyMax>
+</config>
+<config>
+	<id>7</id>
+	<level>7</level>
+	<levelName>学者3段</levelName>
+	<levelUpScore>300</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>2</difficultyMin>
+	<difficultyMax>3</difficultyMax>
+</config>
+<config>
+	<id>8</id>
+	<level>8</level>
+	<levelName>学者4段</levelName>
+	<levelUpScore>350</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>2</difficultyMin>
+	<difficultyMax>3</difficultyMax>
+</config>
+<config>
+	<id>9</id>
+	<level>9</level>
+	<levelName>学者5段</levelName>
+	<levelUpScore>400</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>0</wrongScore>
+	<difficultyMin>2</difficultyMin>
+	<difficultyMax>3</difficultyMax>
+</config>
+<config>
+	<id>10</id>
+	<level>10</level>
+	<levelName>养生顾问1锻</levelName>
+	<levelUpScore>500</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-1</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>4</difficultyMax>
+</config>
+<config>
+	<id>11</id>
+	<level>11</level>
+	<levelName>养生顾问2锻</levelName>
+	<levelUpScore>600</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-1</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>4</difficultyMax>
+</config>
+<config>
+	<id>12</id>
+	<level>12</level>
+	<levelName>养生顾问3锻</levelName>
+	<levelUpScore>700</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-1</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>4</difficultyMax>
+</config>
+<config>
+	<id>13</id>
+	<level>13</level>
+	<levelName>养生顾问4锻</levelName>
+	<levelUpScore>800</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-1</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>4</difficultyMax>
+</config>
+<config>
+	<id>14</id>
+	<level>14</level>
+	<levelName>养生顾问5锻</levelName>
+	<levelUpScore>900</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-1</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>4</difficultyMax>
+</config>
+<config>
+	<id>15</id>
+	<level>15</level>
+	<levelName>养生专家1段</levelName>
+	<levelUpScore>1200</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-2</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>5</difficultyMax>
+</config>
+<config>
+	<id>16</id>
+	<level>16</level>
+	<levelName>养生专家2段</levelName>
+	<levelUpScore>1400</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-2</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>5</difficultyMax>
+</config>
+<config>
+	<id>17</id>
+	<level>17</level>
+	<levelName>养生专家3段</levelName>
+	<levelUpScore>1600</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-2</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>5</difficultyMax>
+</config>
+<config>
+	<id>18</id>
+	<level>18</level>
+	<levelName>养生专家4段</levelName>
+	<levelUpScore>1800</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-2</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>5</difficultyMax>
+</config>
+<config>
+	<id>19</id>
+	<level>19</level>
+	<levelName>养生专家5段</levelName>
+	<levelUpScore>2000</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-2</wrongScore>
+	<difficultyMin>3</difficultyMin>
+	<difficultyMax>5</difficultyMax>
+</config>
+<config>
+	<id>20</id>
+	<level>20</level>
+	<levelName>养生大师</levelName>
+	<levelUpScore>0</levelUpScore>
+	<rightScore>3</rightScore>
+	<wrongScore>-3</wrongScore>
+	<difficultyMin>4</difficultyMin>
+	<difficultyMax>5</difficultyMax>
+</config>
+</root>
