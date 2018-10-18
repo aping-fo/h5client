@@ -9,7 +9,8 @@ cc.Class({
         //     serializable: true,   
         // },
         answers:[cc.Button],
-        signs:[cc.Sprite],
+        sign_right:cc.Sprite,
+        sign_wrong:cc.Sprite,
         title: {
             default: null,                                  
             type: cc.Label, 
@@ -42,7 +43,16 @@ cc.Class({
         for(var i=0;i<length;i++)
         {
             cc.find('Label',this.answers[i].node).getComponent(cc.Label).string=data['options'][i];
-        }      
-    }
+        } 
+        this.sign_right.node.active=false;
+        this.sign_wrong.node.active=false;
+    },
+    ShowAnswerSign(idx,isRight)
+    {
+        var sign=isRight?this.sign_right.node:this.sign_wrong.node;
+        sign.active=true;
+        var pos=this.answers[idx].node.getPosition();
+        sign.position =pos;
+    },
     // update (dt) {},
 });

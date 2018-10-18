@@ -33,7 +33,11 @@ var WXTool = cc.Class({
         this.m_isLogin = false;
         this.m_loginBtn = null;
     },
-
+    reset()
+    {
+        this.m_isLogin = false;
+        this.m_loginBtn = null;
+    },
     //登陆
     login(){
         if(this.m_isLogin){
@@ -193,6 +197,26 @@ var WXTool = cc.Class({
             }
         });
     },
+    //邀请好友
+shareToPlayTogether(roomId,callback){
+    if(!enable){
+        callback();
+        return;
+    }
+
+    
+    wx.shareAppMessage({
+        title: '养生大师',
+        imageUrl: cc.loader.md5Pipe.transformURL(cc.url.raw(shareImages[rand])),
+        query: "roomId="+roomId, 
+        success: function(res){
+            callback();
+        },
+
+        fail: function(res){
+        }
+    });
+},
 
     //分享屏幕截图
     shareWithImage(){
@@ -356,5 +380,13 @@ var WXTool = cc.Class({
         }
         
         callback(energe, recoverTime)
+    },
+    //获取卡片传入参数
+    getLaunchOptionsSync()
+    {
+        if(!enable){
+            return null;
+        }
+        return wx.getLaunchOptionsSync().query;
     }
 });

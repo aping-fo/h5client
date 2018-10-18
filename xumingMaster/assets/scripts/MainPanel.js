@@ -38,6 +38,11 @@ cc.Class({
             type: cc.Button, 
             serializable: true,   
         },
+        btn_setting: {
+            default: null,                                
+            type: cc.Button, 
+            serializable: true,   
+        },
         matchingBoard: {
             default: null,                                
             type: matchingBoard, 
@@ -53,6 +58,7 @@ cc.Class({
         this.btn_rank.node.on("click", this.onViewRank, this);
         this.btn_robot.node.on("click", this.onPlayWithRobot, this);
         this.btn_challenge.node.on("click", this.onChallenge, this);
+        this.btn_setting.node.on("click", this.onSetting, this);
         this.node.on('onPassMatching',this.onPassMatching,this);
         this.node.on('onCancelMatching',this.onCancelMatching,this);
         
@@ -65,9 +71,38 @@ cc.Class({
     start () {
         this.matchingBoard.node.active=false;
         GameManager.getInstance().gameState=gameEnum.GAME_STATE.HOME;
+        //  //加入房间
+        //  GameManager.getInstance().JoinRoom(100,function(resp){
+        //     GameManager.getInstance().CheckMatch();
+        //  });
+        //  //return;
+        var lauchOption=WXTool.getInstance().getLaunchOptionsSync;//启动参数
+        if(lauchOption == null)
+        {
+            
+        }
+        else{//卡片启动流程
+            var roomId=lauchOption.roomId;
+            if(roomId != null)
+            {
+                //加入房间
+                GameManager.getInstance().JoinRoom(roomId,function(resp){});
+            }
+        }
+        
     },
     onInvite(event){
-        WXTool.getInstance().share();
+       
+        var th=this;
+        GameManager.getInstance().CreateRoom(function(resp){
+            var roomId=resp;
+            console.log("roomId  "+roomId)
+            GameManager.getInstance().gameState=gameEnum.GAME_STATE.WAITING_OPPONENT;
+            WXTool.getInstance().shareToPlayTogether(roomId,function(){
+                cc.director.loadScene("game", function(){
+                });
+            });
+        }); 
     },
     onMatch(event){
         var th=this;
@@ -94,6 +129,11 @@ cc.Class({
         });
     },
     onChallenge(event){
+    },
+    onSetting(event)
+    {
+        cc.director.loadScene("playerInfo", function(){
+        });
     },
     //测试用
     onPassMatching(event)
@@ -138,6 +178,7 @@ cc.Class({
         }
         
     },
+   
     update (dt) {
         if(GameManager.getInstance().gameState == gameEnum.GAME_STATE.MATCHING)
         {

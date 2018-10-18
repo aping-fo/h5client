@@ -39,7 +39,11 @@ cc.Class({
             this.lbl_me.string=GameManager.getInstance().myInfo.wxName;
             imageLoader.loadImg(this.icon_me,GameManager.getInstance().myInfo.iconUrl);
         }
-       
+        if(GameManager.getInstance().oppInfo != null)
+        {
+            this.lbl_opp.string=GameManager.getInstance().oppInfo.wxName;
+            // imageLoader.loadImg(this.icon_me,GameManager.getInstance().myInfo.iconUrl);
+        }
     },
     // update (dt) {},
 });

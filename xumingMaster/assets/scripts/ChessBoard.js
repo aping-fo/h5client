@@ -1,4 +1,5 @@
 var GameManager = require("GameManager");
+var Chess = require("Chess");
 cc.Class({
     extends: cc.Component,
 
@@ -19,7 +20,13 @@ cc.Class({
             type: cc.SpriteAtlas, // optional, default is typeof default
             serializable: true,   // optional, default is true
         },
-        chesses:[cc.Sprite],
+        atlas_category:
+        {
+            default: null, 
+            type: cc.SpriteAtlas, // optional, default is typeof default
+            serializable: true,   // optional, default is true
+        },
+        chesses:[Chess],
         chesses_marked:[],
         winArr:null
     },
@@ -31,9 +38,9 @@ cc.Class({
         this.chesses_marked=new Array();
         for(var i=0;i<9;i++)
         {
-            var chess=cc.instantiate(this.chessPrefab);
-            chess.on("click", this.onChessClick, this);
-            chess.parent=this.chessGroup.node;
+            var chess=cc.instantiate(this.chessPrefab).getComponent(Chess);
+            chess.sp_state.node.on("click", this.onChessClick, this);
+            chess.node.parent=this.chessGroup.node;
             this.chesses.push(chess);
         }
     },
@@ -53,15 +60,15 @@ cc.Class({
             ran=parseInt(ran);
         }while(this.chesses_marked.indexOf(ran) != -1);
         this.chesses_marked.push(ran);
-        this.chesses[ran].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame("what");
+        this.chesses[ran].sp_state.spriteFrame=this.atlas.getSpriteFrame("what");
     },
     OnNext()
     {
-        this.chesses[GameManager.getInstance().curQuestionIdx].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame("what");
+        this.chesses[GameManager.getInstance().curQuestionIdx].sp_state.spriteFrame=this.atlas.getSpriteFrame("what");
         
     },
     onChessClick(event){
-        var idx=this.chesses.indexOf(event.target);
+        var idx=this.chesses.indexOf(event.target.parent.getComponent(Chess));
         if(idx == GameManager.getInstance().curQuestionIdx)
         {
             this.node.dispatchEvent( new cc.Event.EventCustom('onChessClick', true) );
@@ -70,16 +77,15 @@ cc.Class({
     },
     result(index,result)
     {
-        console.log(result)
-        this.chess es[index].getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrame(result == 1 ?"o":"x");;
+        this.chesses[index].sp_state.spriteFrame=this.atlas.getSpriteFrame(result == 1 ?"o":"x");
     },
     setGrid()
     {
         var questions=GameManager.getInstance().questions;
-        var length=questions.length;
+        var length=this.chesses.length;
         for(var i=0;i<length;i++)
         {
-            // this.chesses.
+            this.chesses[i].sp_state.spriteFrame=this.atlas_category.getSpriteFrame('p'+questions[i]['category']);
         }
     },
     CheckWin()
@@ -87,7 +93,11 @@ cc.Class({
         var length=this.winArr.length;
         for(var i=0;i<length;i++)
         {
-            var name=this.chesses[this.winArr[i][0]].getComponent(cc.Sprite).spriteFrame._name;
+            if(this.chesses[this.winArr[i][0]].sp_state.spriteFrame == null)
+            {
+                continue;
+            }
+            var name=this.chesses[this.winArr[i][0]].sp_state.spriteFrame._name;
             if(this.CheckIsSame(this.chesses[this.winArr[i][1]],name) && this.CheckIsSame(this.chesses[this.winArr[i][2]],name))
             {
                 if(name == 'o')
@@ -101,15 +111,44 @@ cc.Class({
             }
 
         }
+       
+        if(GameManager.getInstance().cuRound>=9)
+        {
+            var countA;
+            var countB;
+            length=this.chesses.length;
+            for(i=0;i<length;i++)
+            {
+                var name=this.chesses[i].sp_state.spriteFrame._name;
+                if(name == 'o')
+                {
+                    countA=countA+1;
+                }
+                else
+                {
+                    countB=countB+1;
+                }
+            }
+            var mySide=GameManager.getInstance().myInfo['side'];
+            if(countA>countB && mySide == 0 || countA<countB && mySide == 1 )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+       
         return null;
     },
     CheckIsSame(gridA,name)
     {
-        if(gridA.getComponent(cc.Sprite).spriteFrame == null)
+        if(gridA.sp_state.spriteFrame == null)
         {
             return false;
         }
-        return gridA.getComponent(cc.Sprite).spriteFrame._name == name;
+        return gridA.sp_state.spriteFrame._name == name;
     }
     // update (dt) {},
 });

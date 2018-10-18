@@ -4,5 +4,6 @@
   <config>
 	<item client="LevelCfg" server="LevelCfg" file="d等级" /> 
 	<item client="QuestionCfg" server="QuestionCfg" file="t题库" /> 
+	<item client="GlobalConfig" server="GlobalConfig" file="q全局配置表" /> 
   </config>
 </items>

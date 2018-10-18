@@ -28,6 +28,7 @@ var GameManager=cc.Class({
             type:{Object}
         },
         curQuestionIdx:-1,
+        curRound:0,
         callBack_matchSuc:null,
         callBack_matchCheck:null,
       
@@ -53,10 +54,17 @@ var GameManager=cc.Class({
             callback(resp);
         });
     },
+    GetRoleInfo(callback)
+    {
+        var data={};
+        httpReq.Post(CMD.GET_ROLE,data,function(resp){
+            callback(resp);
+        });
+    },
     //请求匹配
     SendMatch(callback)
     {
-        var data={};
+        var data={nickName:GameManager.getInstance().myInfo['wxName']};
         httpReq.Post(CMD.START_MATCH,data,function(resp){
             callback(resp);
         });
@@ -163,7 +171,22 @@ var GameManager=cc.Class({
              callback(resp);
          });
       },
-   
+       //创建房间
+       CreateRoom(callback)
+       {
+          var data={};
+          httpReq.Post(CMD.CREATE_ROOM,data,function(resp){
+              callback(resp);
+          });
+       },
+        //加入房间
+        JoinRoom(roomId,callback)
+        {
+           var data={roomID:roomId};
+           httpReq.Post(CMD.JOIN_ROOM,data,function(resp){
+               callback(resp);
+           });
+        },
 });
 GameManager._instance = null;
 GameManager.getInstance = function () {

@@ -28,7 +28,11 @@ var CMD = cc.Enum({
     //提交胜利
     SUBMIT_VICTORY:2010,
     //检查抢答状态
-    CHECK_ROB:2011
+    CHECK_ROB:2011,
+    //开房
+    CREATE_ROOM:2012,
+    //进房
+    JOIN_ROOM:2013,
 });
 
 module.exports = CMD;

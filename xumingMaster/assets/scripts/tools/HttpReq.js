@@ -1,3 +1,6 @@
+var Alert=require("Alert")
+var WXTool = require("WXTool")
+var errorCount=0;
 var Base64 = require("Base64");
 var md5=require("md5");
 var appScript = {
@@ -39,6 +42,18 @@ var appScript = {
     },
 
     Post: function (cmd, reqData, callback) {
+       
+        if(errorCount>20)
+        {
+            Alert.show("失去连接，是否重连",function(){
+                errorCount=0;
+                WXTool.getInstance().reset();
+                Alert.onDestory();
+                cc.director.loadScene("begin", function(){
+                });
+            },function(){},"",0.3)
+            return;
+        }
         reqData = reqData == null?{}:reqData;
         var self = this;
         // console.log(url)
@@ -70,6 +85,10 @@ var appScript = {
                             var data=JSON.parse(responseJson['data']);
                             callback(data);
                         }
+                        else
+                        {
+                            errorCount++;
+                        }
                         
                     }else{
                         console.log("返回数据不存在")
@@ -77,6 +96,7 @@ var appScript = {
                     }
                 }else{
                     console.log("请求失败")
+                    errorCount++;
                     callback(false);
                 }
             }
