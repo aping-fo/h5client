@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "693dfbab-41c7-46a8-8c91-ebcdd3cd0654",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "excerciseAtlas": {
+      "ver": "1.0.3",
+      "uuid": "e97a892e-c4c8-461a-8ea3-7289731efd50",
+      "rawTextureUuid": "693dfbab-41c7-46a8-8c91-ebcdd3cd0654",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 625,
+      "height": 967,
+      "rawWidth": 625,
+      "rawHeight": 967,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

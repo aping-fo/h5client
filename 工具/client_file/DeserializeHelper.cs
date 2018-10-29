@@ -20,6 +20,12 @@ namespace Com.Game.ConfigData
 			valueDicts.Add("LevelCfg",valueDict);
 			valueDict = Deserialize("QuestionCfg", bb);
 			valueDicts.Add("QuestionCfg",valueDict);
+			valueDict = Deserialize("GlobalConfig", bb);
+			valueDicts.Add("GlobalConfig",valueDict);
+			valueDict = Deserialize("SelfTestCfg", bb);
+			valueDicts.Add("SelfTestCfg",valueDict);
+			valueDict = Deserialize("SelfTestResultCfg", bb);
+			valueDicts.Add("SelfTestResultCfg",valueDict);
 
 			return valueDicts;
 		}
@@ -29,6 +35,9 @@ namespace Com.Game.ConfigData
 		{
 			{ "LevelCfg",  (bb) => { return SerializeHelper.GetLevelCfg1(bb); } },
 			{ "QuestionCfg",  (bb) => { return SerializeHelper.GetQuestionCfg1(bb); } },
+			{ "GlobalConfig",  (bb) => { return SerializeHelper.GetGlobalConfig1(bb); } },
+			{ "SelfTestCfg",  (bb) => { return SerializeHelper.GetSelfTestCfg1(bb); } },
+			{ "SelfTestResultCfg",  (bb) => { return SerializeHelper.GetSelfTestResultCfg1(bb); } },
 		};
 
 		public static Dictionary<int, object> Deserialize(string type, BufferBuilder bb)
@@ -61,6 +70,9 @@ namespace Com.Game.ConfigData
 		{
 			{ "levelcfg", "LevelCfg"},
 			{ "questioncfg", "QuestionCfg"},
+			{ "globalconfig", "GlobalConfig"},
+			{ "selftestcfg", "SelfTestCfg"},
+			{ "selftestresultcfg", "SelfTestResultCfg"},
 		};
 
 		public static string GetSerializeTrueType(string type)
@@ -77,6 +89,9 @@ namespace Com.Game.ConfigData
 		{
 			{ "LevelCfg",  (bb, datas) => { SerializeHelper.PutLevelCfg1(bb, (LevelCfg[])datas); } },
 			{ "QuestionCfg",  (bb, datas) => { SerializeHelper.PutQuestionCfg1(bb, (QuestionCfg[])datas); } },
+			{ "GlobalConfig",  (bb, datas) => { SerializeHelper.PutGlobalConfig1(bb, (GlobalConfig[])datas); } },
+			{ "SelfTestCfg",  (bb, datas) => { SerializeHelper.PutSelfTestCfg1(bb, (SelfTestCfg[])datas); } },
+			{ "SelfTestResultCfg",  (bb, datas) => { SerializeHelper.PutSelfTestResultCfg1(bb, (SelfTestResultCfg[])datas); } },
 		};
 
 		public static void Serialize(string type, BufferBuilder bb, object[] datas)
@@ -99,6 +114,12 @@ namespace Com.Game.ConfigData
 			valueDicts.Add("LevelCfg",rawDatas);
 			rawDatas = Deserialize2("QuestionCfg", bb);
 			valueDicts.Add("QuestionCfg",rawDatas);
+			rawDatas = Deserialize2("GlobalConfig", bb);
+			valueDicts.Add("GlobalConfig",rawDatas);
+			rawDatas = Deserialize2("SelfTestCfg", bb);
+			valueDicts.Add("SelfTestCfg",rawDatas);
+			rawDatas = Deserialize2("SelfTestResultCfg", bb);
+			valueDicts.Add("SelfTestResultCfg",rawDatas);
 			return valueDicts;
 		}
 #endif
@@ -107,5 +128,11 @@ namespace Com.Game.ConfigData
 		public static LevelCfgDecodeHandler OnLevelCfgDecode = null;
 		public delegate void QuestionCfgDecodeHandler(QuestionCfg data);
 		public static QuestionCfgDecodeHandler OnQuestionCfgDecode = null;
+		public delegate void GlobalConfigDecodeHandler(GlobalConfig data);
+		public static GlobalConfigDecodeHandler OnGlobalConfigDecode = null;
+		public delegate void SelfTestCfgDecodeHandler(SelfTestCfg data);
+		public static SelfTestCfgDecodeHandler OnSelfTestCfgDecode = null;
+		public delegate void SelfTestResultCfgDecodeHandler(SelfTestResultCfg data);
+		public static SelfTestResultCfgDecodeHandler OnSelfTestResultCfgDecode = null;
 	}
 }

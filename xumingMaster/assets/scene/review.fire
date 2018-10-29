@@ -55,7 +55,7 @@
     "_zIndex": 0,
     "groupIndex": 0,
     "autoReleaseAssets": false,
-    "_id": "dff97fc0-d954-47a0-a19f-dd44ef1990db"
+    "_id": "d88f99d4-dd07-49c3-a406-b06da9fc1f5a"
   },
   {
     "__type__": "cc.Node",
@@ -1423,7 +1423,10 @@
     "closeBtn": {
       "__id__": 31
     },
-    "currentIndex": 0,
+    "scrollView": {
+      "__id__": 10
+    },
+    "currentRequestIndex": 0,
     "refreshCount": 6,
     "_id": "84/YWOEqhKQ6MrsH7nWYl7"
   }

@@ -1,0 +1,28 @@
+{
+  "root": {
+    "-xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+    "config": [
+      {
+        "id": "1",
+        "category": "1",
+        "score": "[-10,0]",
+        "result": "结果1",
+        "recommend": "建议1"
+      },
+      {
+        "id": "2",
+        "category": "1",
+        "score": "[1,10]",
+        "result": "结果2",
+        "recommend": "建议2"
+      },
+      {
+        "id": "3",
+        "category": "1",
+        "score": "[11,20]",
+        "result": "结果3",
+        "recommend": "建议3"
+      }
+    ]
+  }
+}

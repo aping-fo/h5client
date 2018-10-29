@@ -15,7 +15,9 @@ cc.Class({
             default: 0,            
             visible: false    
         },
-        isStart:false
+        isStart:false,
+        callback:null,
+        pre:""
     },
 
 
@@ -48,6 +50,15 @@ cc.Class({
         var baseSecond = this.reduiseTime;
         baseSecond = baseSecond - 1;
         this.reduiseTime = baseSecond;
+        if(this.reduiseTime<=0)
+        {
+            this.isStart=false;
+            if(this.callback != null)
+            {
+                this.callback();
+            }
+            return;
+        }
         var hour = Math.floor(baseSecond / 3600);
         var residue = baseSecond - hour * 3600;
         var minute = Math.floor(residue / 60);
@@ -58,16 +69,26 @@ cc.Class({
         if (minute < 10) {
             minute = "0" + minute;
         }
-        if (residue < 10) {
-            residue = "0" + residue;
-        }
+        // if (residue < 10) {
+        //     residue = "0" + residue;
+        // }
         // this.label.string = hour + " : " + minute + " : " + residue;
-        this.label.string =  minute + " : " + residue;
+        // this.label.string =  minute + " : " + residue;
+        this.label.string =  this.pre+residue;
     },
-    startCountDown(totalTime)
+    startCountDown(totalTime,cb,preContext)
     {
+        this.pre=preContext;
         this.isStart=true;
         this.reduiseTime=totalTime;
+        this.callback=cb;
         this.countDownShow();
+    },
+    reset()
+    {
+        this.pre="";
+        this.isStart=false;
+        this.reduiseTime=0;
+        this.callback=null;
     }
 });

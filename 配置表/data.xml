@@ -5,5 +5,7 @@
 	<item client="LevelCfg" server="LevelCfg" file="d等级" /> 
 	<item client="QuestionCfg" server="QuestionCfg" file="t题库" /> 
 	<item client="GlobalConfig" server="GlobalConfig" file="q全局配置表" /> 
+	<item client="SelfTestCfg" server="SelfTestCfg" file="z自我检测题库" /> 
+	<item client="SelfTestResultCfg" server="SelfTestResultCfg" file="z自我检测结果" /> 
   </config>
 </items>

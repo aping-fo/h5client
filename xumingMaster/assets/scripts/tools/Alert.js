@@ -123,7 +123,11 @@ cc.Class({
             // 执行弹出动画
             self.startFadeOut = function () {
                 cc.eventManager.pauseTarget(Alert._alert, true);
-                Alert._alert.runAction(self.actionFadeOut);
+                if(Alert._alert != null)
+                {
+                    Alert._alert.runAction(self.actionFadeOut);
+                }
+            
             };
         
             // 弹进动画完成回调

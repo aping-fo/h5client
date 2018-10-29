@@ -42,17 +42,29 @@ cc.Class({
         var length=this.answers.length;
         for(var i=0;i<length;i++)
         {
-            cc.find('Label',this.answers[i].node).getComponent(cc.Label).string=data['options'][i];
+            if(i<data['options'].length)
+            {
+                this.answers[i].node.active=true;
+                cc.find('Label',this.answers[i].node).getComponent(cc.Label).string=data['options'][i];
+            }
+            else{
+                this.answers[i].node.active=false;
+            }
+           
         } 
         this.sign_right.node.active=false;
         this.sign_wrong.node.active=false;
     },
     ShowAnswerSign(idx,isRight)
     {
-        var sign=isRight?this.sign_right.node:this.sign_wrong.node;
-        sign.active=true;
-        var pos=this.answers[idx].node.getPosition();
-        sign.position =pos;
+        if(idx != undefined)
+        {
+            var sign=isRight?this.sign_right.node:this.sign_wrong.node;
+            sign.active=true;
+            var pos=cc.p(196,143-132*idx)
+            sign.position =pos;
+        }     
     },
+
     // update (dt) {},
 });

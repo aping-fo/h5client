@@ -12,6 +12,11 @@ cc.Class({
             type: cc.Sprite, 
             serializable: true,   
         },
+        lbl_catergory: {
+            default: null,                                  
+            type: cc.Label, 
+            serializable: true,   
+        },
     },
 
 

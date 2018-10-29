@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<config>
+	<id>1</id>
+	<category>1</category>
+	<score>[-10,0]</score>
+	<result>结果1</result>
+	<recommend>建议1</recommend>
+</config>
+<config>
+	<id>2</id>
+	<category>1</category>
+	<score>[1,10]</score>
+	<result>结果2</result>
+	<recommend>建议2</recommend>
+</config>
+<config>
+	<id>3</id>
+	<category>1</category>
+	<score>[11,20]</score>
+	<result>结果3</result>
+	<recommend>建议3</recommend>
+</config>
+</root>

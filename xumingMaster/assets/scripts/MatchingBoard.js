@@ -21,7 +21,7 @@ cc.Class({
     },
 
     start () {
-
+        
     },
     onPass()
     {

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<config>
+	<id>1</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到40个左右题目的范围内1+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案2,8字符以内答案4,8字符以内答案3,8字符以内答案5]</options>
+	<catergory>1</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>2</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到41个左右题目的范围内2+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案3,8字符以内答案5,8字符以内答案4,8字符以内答案6]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>3</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到42个左右题目的范围内3+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案4,8字符以内答案6,8字符以内答案5,8字符以内答案7]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>4</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到43个左右题目的范围内4+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案5,8字符以内答案7,8字符以内答案6,8字符以内答案8]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>5</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到44个左右题目的范围内5+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案6,8字符以内答案8,8字符以内答案7,8字符以内答案9]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>6</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到45个左右题目的范围内6+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案7,8字符以内答案9,8字符以内答案8,8字符以内答案10]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>7</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到46个左右题目的范围内7+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案8,8字符以内答案10,8字符以内答案9,8字符以内答案11]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>8</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到47个左右题目的范围内8+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案9,8字符以内答案11,8字符以内答案10,8字符以内答案12]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>9</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到48个左右题目的范围内9+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案10,8字符以内答案12,8字符以内答案11,8字符以内答案13]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+<config>
+	<id>10</id>
+	<content>前面一堆无用的字都是在凑数,为的是把字数凑到49个左右题目的范围内10+1=</content>
+	<contentImgUrl></contentImgUrl>
+	<options>[8字符以内答案11,8字符以内答案13,8字符以内答案12,8字符以内答案14]</options>
+	<catergory>0</catergory>
+	<score>[-1,0,1,2]</score>
+</config>
+</root>

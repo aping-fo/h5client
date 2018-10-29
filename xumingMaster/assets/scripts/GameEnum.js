@@ -11,9 +11,13 @@ var GameConst ={
     INTERVAL_CHECKNEXTROUND:0.5,
     INTERVAL_CHECKCHESS_STATE:0.5,
     INTERVAL_ROUND_BETWEEN_ROUND:3,//每轮间隔
-    DELAY_GAME_START:2,//请求棋盘信息延时秒数
+    DELAY_GAME_START:0.2,//请求棋盘信息延时秒数
     DELAY_SHOW_EXCERCISES:.2,//显示题目延时秒数
-    DELAY_SHOW_GAME_RESULT:2
+    DELAY_SHOW_EXCERCISES_WATCHER:1,//显示题目延时秒数
+    DELAY_SHOW_GAME_RESULT:2,
+    ANSWER_TIME:20,//答题时间
+    GRAB_WAIT_time:3,//抢答等待时间
+    GRAB_AUTO_time:3,//自动抢答时间
 };
 module.exports = {
     GAME_STATE: GAME_STATE,

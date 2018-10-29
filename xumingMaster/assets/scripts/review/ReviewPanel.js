@@ -25,7 +25,12 @@ cc.Class({
             default: null
         },
 
-        currentIndex: 0,
+        scrollView: {
+            type: cc.ScrollView,
+            default: null
+        },
+
+        currentRequestIndex: 0,
         refreshCount: 6,
     },
 
@@ -34,6 +39,7 @@ cc.Class({
     onLoad () {
         _this = this;
         
+        this.scrollView.node.on("scroll-to-bottom", this.onScrollToBottom, this)
         this.closeBtn.node.on("click", this.onCloseBtnClick, this);
     },
 
@@ -42,9 +48,14 @@ cc.Class({
     },
 
     onEnable(){
-        this.currentIndex = 0;
+        this.currentRequestIndex = 0;
 
-        HistoryQuestionModel.getInstance().getData(this.currentIndex, this.refreshCount - 1, this.onDataUpdateCallback);
+        HistoryQuestionModel.getInstance().getData(this.currentRequestIndex, this.currentRequestIndex + this.refreshCount - 1, this.onDataUpdateCallback);
+    },
+
+    onScrollToBottom(){
+        console.log(this.currentRequestIndex);
+        HistoryQuestionModel.getInstance().getData(this.currentRequestIndex, this.currentRequestIndex + this.refreshCount - 1, this.onDataUpdateCallback);
     },
 
     onCloseBtnClick(){
@@ -52,8 +63,6 @@ cc.Class({
     },
 
     onDataUpdateCallback(datas, from, to){
-        _this.currentIndex = 6;
-
         if(datas.length == 0){
             //无数据
             for(var i = 0; i < _this.contentNode.childrenCount; i++){
@@ -85,6 +94,8 @@ cc.Class({
                     item.getChildByName("explain").getComponent(cc.Label).string = datas[i].explain;
                     item.getChildByName("answer").active = true;
                     item.getChildByName("explain").active = true;
+            
+                    _this.currentRequestIndex = i + 1;
                 }
             }
         }

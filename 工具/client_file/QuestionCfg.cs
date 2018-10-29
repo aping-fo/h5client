@@ -14,6 +14,7 @@ namespace Com.Game.ConfigData
 		public ObscuredInt answerIndex;//答案
 		public ObscuredInt catergory;//分类
 		public ObscuredInt difficulty;//难度
+		public string explain;//解释
 
 		public QuestionCfg()
 		{
@@ -28,6 +29,7 @@ namespace Com.Game.ConfigData
 			answerIndex = bb.Get7BitEncodeInt();
 			catergory = bb.Get7BitEncodeInt();
 			difficulty = bb.Get7BitEncodeInt();
+			explain = bb.GetString();
 
 			if (DeserializeHelper.OnQuestionCfgDecode != null)
 			{
@@ -44,6 +46,7 @@ namespace Com.Game.ConfigData
 			bb.Put7BitEncodeInt(answerIndex);
 			bb.Put7BitEncodeInt(catergory);
 			bb.Put7BitEncodeInt(difficulty);
+			bb.PutString(explain);
 		}
 
 		public int GetId()
