@@ -1,0 +1,200 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "main_review_show",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 4.516666666666667,
+  "sample": 60,
+  "speed": 2,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "icon": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -254
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 11
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "title/img_title": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.5166666666666666,
+              "value": 0
+            },
+            {
+              "frame": 2.5,
+              "value": 255
+            }
+          ],
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 1.5166666666666666,
+              "value": [
+                0,
+                0
+              ]
+            },
+            {
+              "frame": 2.5,
+              "value": [
+                18,
+                41
+              ]
+            }
+          ]
+        }
+      },
+      "buttons/btn_review_test": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 2.5,
+              "value": 0
+            },
+            {
+              "frame": 3,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "buttons/btn_review_question": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 3,
+              "value": 0
+            },
+            {
+              "frame": 3.5166666666666666,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "buttons/btn_review_arena": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 3.5166666666666666,
+              "value": 0
+            },
+            {
+              "frame": 4,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "buttons/btn_review_master": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 4,
+              "value": 0
+            },
+            {
+              "frame": 4.516666666666667,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "img_title": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 2.0166666666666666,
+              "value": 0
+            },
+            {
+              "frame": 2.5,
+              "value": 255
+            }
+          ],
+          "position": [
+            {
+              "frame": 2.0166666666666666,
+              "value": [
+                -25,
+                66
+              ]
+            },
+            {
+              "frame": 2.5,
+              "value": [
+                20,
+                42
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

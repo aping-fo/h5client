@@ -9,7 +9,7 @@
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
   "jailbreakPlatform": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "mergeStartScene": false,
   "oauthLoginServer": "",
   "optimizeHotUpdate": false,
@@ -25,7 +25,7 @@
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "startScene": "d47fd53c-ae95-4575-b077-a1fa2820ef14",
+  "startScene": "57640859-8133-46b4-84fe-c86ee31eec8f",
   "title": "xumingMaster",
   "webOrientation": "auto",
   "wechatgame": {
@@ -33,7 +33,7 @@
     "appid": "wxb00112803f6343cc",
     "isSubdomain": false,
     "orientation": "portrait",
-    "subContext": "wechatgame-subcontext"
+    "subContext": ""
   },
   "xxteaKey": "435ed896-8026-4f",
   "zipCompressJs": true

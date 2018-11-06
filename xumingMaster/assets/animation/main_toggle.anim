@@ -1,0 +1,239 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "main_toggle",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 4.666666666666667,
+  "sample": 60,
+  "speed": 2,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "bottom/dot1": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -733
+            },
+            {
+              "frame": 1.5,
+              "value": -733
+            },
+            {
+              "frame": 2.1666666666666665,
+              "value": -590
+            }
+          ]
+        }
+      },
+      "bottom/dot2": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -733
+            },
+            {
+              "frame": 2.5,
+              "value": -733
+            },
+            {
+              "frame": 3.1666666666666665,
+              "value": -590
+            }
+          ]
+        }
+      },
+      "bottom/dot3": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -733
+            },
+            {
+              "frame": 3.5,
+              "value": -733
+            },
+            {
+              "frame": 4.166666666666667,
+              "value": -590
+            }
+          ]
+        }
+      },
+      "bottom/toggleContainer/rankToggle": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -70
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 74
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "bottom/toggleContainer/testToggle": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -70
+            },
+            {
+              "frame": 1,
+              "value": -70
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 74
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1,
+              "value": 0
+            },
+            {
+              "frame": 1.6666666666666667,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "bottom/toggleContainer/arenaToggle": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -70
+            },
+            {
+              "frame": 2,
+              "value": -70
+            },
+            {
+              "frame": 2.6666666666666665,
+              "value": 74
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 2,
+              "value": 0
+            },
+            {
+              "frame": 2.6666666666666665,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "bottom/toggleContainer/reviewToggle": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -70
+            },
+            {
+              "frame": 3,
+              "value": -70
+            },
+            {
+              "frame": 3.6666666666666665,
+              "value": 74
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 3,
+              "value": 0
+            },
+            {
+              "frame": 3.6666666666666665,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "bottom/toggleContainer/inviteToggle": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -70
+            },
+            {
+              "frame": 4,
+              "value": -70
+            },
+            {
+              "frame": 4.666666666666667,
+              "value": 74
+            }
+          ],
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 4,
+              "value": 0
+            },
+            {
+              "frame": 4.666666666666667,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "bottom/dot": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -733
+            },
+            {
+              "frame": 0.5,
+              "value": -733
+            },
+            {
+              "frame": 1.1666666666666667,
+              "value": -590
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

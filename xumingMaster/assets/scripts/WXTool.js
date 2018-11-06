@@ -14,7 +14,8 @@ var WXTool = cc.Class({
         instance: null,
         getInstance: function () {
             return this.instance || (this.instance = new WXTool()), this.instance;
-        }
+        },
+        enable: enable,
     },
 
     ctor: function () {
@@ -325,7 +326,7 @@ var WXTool = cc.Class({
         if (!enable) {
             return null;
         }
-        return wx.getLaunchOptionsSync().query;
+        return wx.getLaunchOptionsSync();
     },
 
     wxOnShow(callback) {
@@ -336,4 +337,111 @@ var WXTool = cc.Class({
         }
     },
 
+    ensureDirFor(path, callback){
+        // cc.log('mkdir:' + path);
+        if(!enable){
+            return;
+        }
+
+        var _this = this;
+        var fs = wx.getFileSystemManager();
+        var ensureDir = cc.path.dirname(path);
+        if (ensureDir === "wxfile://usr" || ensureDir === "http://usr") {
+            callback();
+            return;
+        }
+        fs.access({
+            path: ensureDir,
+            success: callback,
+            fail: function (res) {
+                _this.ensureDirFor(ensureDir, function () {
+                    fs.mkdir({
+                        dirPath: ensureDir,
+                        complete: callback,
+                    });
+                });
+            },
+        });
+    },
+
+    saveFileToLocal(fromPath, callback){
+        if(!enable){
+            return;
+        }
+
+        // var localPath = wx.env.USER_DATA_PATH + '/' + toPath;
+        var fs = wx.getFileSystemManager();
+        fs.saveFile({
+            tempFilePath: fromPath,
+            success: function(res){
+                if(callback){
+                    callback("success", res.savedFilePath);
+                }
+            },
+
+            fail: function(res){
+                console.log(res.errMsg);
+                if(callback){
+                    callback("fail");
+                }
+            }
+        });
+        // this.ensureDirFor(localPath, function () {
+        //     fs.saveFile({
+        //         tempFilePath: fromPath, 
+        //         filePath: toPath,
+        //         success: function(res){
+        //             if(callback){
+        //                 callback("success", res.savedFilePath);
+        //             }
+        //         },
+
+        //         fail: function(res){
+        //             console.log(res.errMsg);
+        //             if(callback){
+        //                 callback("fail");
+        //             }
+        //         }
+        //     });
+        // });
+    },
+
+    //保存图片到相册
+    saveImageToAlbum(path, callback){
+        if(!enable){
+            return;
+        }
+
+        new Promise(function(resolve, reject){
+            wx.authorize({
+                scope: "scope.writePhotosAlbum",
+                success: function(){
+                    resolve();
+                },
+
+                fail: function(){
+                    reject();
+                }
+            })
+        }).then(function(){
+            wx.saveImageToPhotosAlbum({
+                filePath: path,
+                success: function(){
+                    if(callback){
+                        callback("success");
+                    }
+                },
+
+                fail: function(){
+                    if(callback){
+                        callback("fail");
+                    }
+                }
+            });
+        }).catch(function(){
+            if(callback){
+                callback("fail");
+            }
+        });
+    }
 });

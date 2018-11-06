@@ -1,5 +1,5 @@
 var GameManager = require("GameManager");
-var GrabChessTime = [2,5];
+var GrabChessTime = [3,5];
 var RobotState = {
     Wait: 1,
     GrabChess: 2,

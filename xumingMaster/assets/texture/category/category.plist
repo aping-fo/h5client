@@ -4,63 +4,93 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>p1.png</key>
+            <key>fitting.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-9,0}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{58,178}</string>
+                <string>{173,243}</string>
                 <key>spriteSourceSize</key>
-                <string>{256,256}</string>
+                <string>{173,243}</string>
                 <key>textureRect</key>
-                <string>{{321,155},{58,178}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>p2.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-6,0}</string>
-                <key>spriteSize</key>
-                <string>{160,170}</string>
-                <key>spriteSourceSize</key>
-                <string>{256,256}</string>
-                <key>textureRect</key>
-                <string>{{159,1},{160,170}}</string>
+                <string>{{1,1},{173,243}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>p3.png</key>
+            <key>food.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-10,-3}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{152,178}</string>
+                <string>{173,243}</string>
                 <key>spriteSourceSize</key>
-                <string>{256,256}</string>
+                <string>{173,243}</string>
                 <key>textureRect</key>
-                <string>{{321,1},{152,178}}</string>
+                <string>{{176,1},{173,243}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>p4.png</key>
+            <key>lady.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-8,8}</string>
+                <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{156,206}</string>
+                <string>{173,243}</string>
                 <key>spriteSourceSize</key>
-                <string>{256,256}</string>
+                <string>{173,243}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{156,206}}</string>
+                <string>{{351,1},{173,243}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>sleep.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{173,243}</string>
+                <key>spriteSourceSize</key>
+                <string>{173,243}</string>
+                <key>textureRect</key>
+                <string>{{526,1},{173,243}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>sport.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{173,243}</string>
+                <key>spriteSourceSize</key>
+                <string>{173,243}</string>
+                <key>textureRect</key>
+                <string>{{701,1},{173,243}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>yangsheng.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{173,243}</string>
+                <key>spriteSourceSize</key>
+                <string>{173,243}</string>
+                <key>textureRect</key>
+                <string>{{876,1},{173,243}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -76,9 +106,9 @@
             <key>realTextureFileName</key>
             <string>category.png</string>
             <key>size</key>
-            <string>{500,214}</string>
+            <string>{1050,245}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d1079a50b715c960af917e8ec15306b4:016889a1145c548d87f3fb918e8000a5:853f32473358b28e4713ccc6fb8ed6c1$</string>
+            <string>$TexturePacker:SmartUpdate:673d01d7bcacc6fc1a67c2fcb8bda79e:3fbf4fcf0d65a5f3ede8e71bacbf330f:853f32473358b28e4713ccc6fb8ed6c1$</string>
             <key>textureFileName</key>
             <string>category.png</string>
         </dict>

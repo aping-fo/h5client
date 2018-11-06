@@ -13,6 +13,8 @@ var resultPanel=require('ResultPanel');
 var winorwrongpanel=require('WinOrWrongPanel');
 var winorwrongani=require('rightOrWrongAni');
 var Robot = require("Robot");
+var resultAni=require("resultAni")
+var httpReq=require('HttpReq');
 
 cc.Class({
     extends: cc.Component,
@@ -48,16 +50,23 @@ cc.Class({
             type: cc.Sprite, 
             serializable: true,   
         },
+        btn_back: {
+            default: null,                                  
+            type: cc.Button, 
+            serializable: true,   
+        },
     },
 
 
     onLoad () {
+        httpReq.oppExitCallback = this.oppExitCallback;
         this.resultPanel.node.active=false;
         this.tips.node.active=false;
         this.winorwrongPanel.node.active=false;
         GameManager.getInstance().callBack_matchCheck=this.OnMatchCheckBack;
         this.node.on('onChessClick',this.onChessClick,this);
         this.node.on('onAnswerClick',this.onAnswerClick,this);
+        this.btn_back.node.on('click',this.btnBackClick,this);
         th=this;
     },
 
@@ -74,6 +83,7 @@ cc.Class({
        });
 
        winorwrongani.init(cc.find("Canvas/rightOrWroghtPanel/bg"),cc.find("Canvas/rightOrWroghtPanel/content"),cc.find("Canvas/rightOrWroghtPanel"));
+       resultAni.init(cc.find("Canvas/resultPanel"));
 
      var exBg=cc.find("Canvas/excercisesBoard/bg")
         var exTitleBg=cc.find("Canvas/excercisesBoard/bg_lbl")
@@ -171,7 +181,8 @@ cc.Class({
                 var qst=resp['question'];
                 var idx=qst['index'];
                 GameManager.getInstance().questions[idx]=qst;
-                th.excercisesBoard.OnNext();
+                var edata=GameManager.getInstance().questions[GameManager.getInstance().curQuestionIdx]
+                th.excercisesBoard.OnNext(edata);
                 th.playerHud.timeCounter_me.node.active=true;
                 th.playerHud.timeCounter_opp.node.active=false;
                 th.playerHud.lbl_watching.node.active=false;
@@ -309,12 +320,15 @@ cc.Class({
         var isWin=this.chessBoard.CheckWin();
         if(isWin != null)
         {
-            if(isWin)
-            {
-                GameManager.getInstance().SubmitVictory(function(resp){
-                    console.log(resp);
-                });
-            }
+            // if(isWin)
+            // {
+            //     GameManager.getInstance().SubmitVictory(function(resp){
+            //         console.log(resp);
+            //     });
+            // }
+            GameManager.getInstance().SubmitResult(isWin, function(resp){
+                console.log(resp);
+            });
             th.showResult(isWin);
           
             return;
@@ -373,7 +387,8 @@ cc.Class({
                         var qst=resp['question'];
                         var idx=qst['index'];
                         GameManager.getInstance().questions[idx]=qst;
-                        th.excercisesBoard.OnNext();
+                        var edata=GameManager.getInstance().questions[GameManager.getInstance().curQuestionIdx]
+                        th.excercisesBoard.OnNext(edata);
                         th.chessBoard.SetGrabBtnOppState(true)
                         th.scheduleOnce(function() {
                             th.showQustion();  
@@ -414,11 +429,13 @@ cc.Class({
     //本局结果
     showResult(result)
     {
+        GameManager.getInstance().gameState=gameEnum.GAME_STATE.END;
         winorwrongani.actionClose();
         this.resultPanel.node.active=true;
         this.excercisesBoard.node.active=false;
         this.chessBoard.node.active=true;
         this.resultPanel.showResult(result);
+        resultAni.action(result)
     },
     showTips(content)
     {
@@ -427,5 +444,18 @@ cc.Class({
         this.scheduleOnce(function() {
             this.tips.node.active=false;    
        }, 1);
+    },
+    oppExitCallback()
+    {
+        GameManager.getInstance().SubmitResult(true, function(resp){
+            console.log(resp);
+        });
+        th.showResult(isWin);
+    },
+    btnBackClick(event)
+    {
+        GameManager.getInstance().ExitGame(function(resp){
+            GameManager.getInstance().LoadScene("main")
+        });
     }
 });

@@ -32,15 +32,9 @@ var appScript = {
             self.fadeInAnswer();
         };
         var actionCb3=cc.callFunc(self.cbAction3,self)
-
-        
         self.cbAction4=function(){
-            if(aniAnswerIdx<self.options.length-1)
-            {
-                aniAnswerIdx++;
-                self.fadeInAnswer();
-            }
-            else
+            aniAnswerIdx++;
+            if(aniAnswerIdx>=self.options.length || self.options[aniAnswerIdx].active == false)
             {
                 for(var i=0;i<self.options.length;i++)
                 {
@@ -49,11 +43,14 @@ var appScript = {
             }
         };
         var actionCb4=cc.callFunc(self.cbAction4,self)
-        
         var actionFadeIn=cc.sequence(cc.scaleTo(0.3, 1.1).easing(cc.easeIn(2.0)), cc.scaleTo(.1, 1.0), actionCb1);
         var actionFadeIn2=cc.sequence(cc.fadeTo(0.3, 255), actionCb2);
-        var actionFadeIn3=cc.sequence(cc.fadeTo(0.3, 255), actionCb3);
-        var actionFadeIn4=cc.sequence(cc.fadeTo(0.2, 255), actionCb4);
+        var actionFadeIn3=cc.sequence(cc.fadeTo(0.5, 255), actionCb3);
+        var actionFadeAnswer=[];
+        for(var i=0;i<4;i++)
+        {
+            actionFadeAnswer.push(cc.sequence(cc.delayTime(0.1*i),cc.spawn(cc.fadeTo(0.4, 255),cc.moveTo(0.4,cc.p(0,25-140*i)).easing(cc.easeOut(2.0)),null), actionCb4))
+        }
         self.fadeIn=function()
         {
             cc.eventManager.pauseTarget(self.bg, true);
@@ -73,21 +70,31 @@ var appScript = {
         };
         self.fadeInAnswer=function()
         {
-            if(self.options[aniAnswerIdx].active)
-            {
-                self.options[aniAnswerIdx].runAction(actionFadeIn4);
-            }
-            else
-            {
+            // if(self.options[aniAnswerIdx].active)
+            // {
+            //     self.options[aniAnswerIdx].setPosition(0,25-140*aniAnswerIdx-375);
+            //     self.options[aniAnswerIdx].runAction(actionFadeAnswer[aniAnswerIdx]);
+            // }
+            // else
+            // {
+            //     for(var i=0;i<self.options.length;i++)
+            //     {
+            //         self.options[i].getComponent(cc.Button).interactable =true;
+            //     }
+            // }    
+
                 for(var i=0;i<self.options.length;i++)
                 {
-                    self.options[i].getComponent(cc.Button).interactable =true;
+                    if(self.options[i].active)
+                    {
+                        self.options[i].setPosition(0,25-140*i-375);
+                        self.options[i].runAction(actionFadeAnswer[i]);
+                    }
                 }
-            }    
             
         };
 
-        self.fadeIn();
+        self.fadeInTitle();
     },
 
 };

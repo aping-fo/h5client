@@ -24,7 +24,8 @@ var SelfTestModel = cc.Class({
 
     properties: {
         config: null,
-        resultConfig: null
+        resultConfig: null,
+        descConfig: null
     },
 
 
@@ -47,6 +48,14 @@ var SelfTestModel = cc.Class({
             _this.resultConfig = jsonAsset.json;
         });
 
+        cc.loader.loadRes("config/SelfTestDescriptionCfg", cc.JsonAsset, function(err, jsonAsset){
+            if(err){
+                cc.error(err.message || err);
+                return;
+            }
+            _this.descConfig = jsonAsset.json;
+        });
+
         this.m_index = -1;
     },
 
@@ -54,25 +63,51 @@ var SelfTestModel = cc.Class({
         this.m_index = -1;
     },
 
-    getNextCfg(){
-        this.m_index++;
+    getNextCfg(category){
+      
         
-        var cfg = this.config.root.config[this.m_index];
+        var cfg;
+        do
+        {
+            this.m_index++;
+            cfg=this.config.root.config[this.m_index]
+        }
+        while(cfg !=null && cfg.catergory != category)
 
         return cfg;
     },
 
-    getResultByScore(score){
+    getResultByScore(score,category){
         var configs = this.resultConfig.root.config;
         for(var i = 0; i < configs.length; i++){
             var config = configs[i];
-            var scoreMin = StrToArray(config.score)[0];
-            var scoreMax = StrToArray(config.score)[1];
-
-            if(score >= scoreMin && score <= scoreMax){
-                return config;
+            if(config.category == category)
+            {
+                var scoreMin = StrToArray(config.score)[0];
+                var scoreMax = StrToArray(config.score)[1];
+    
+                if(score >= scoreMin && score <= scoreMax){
+                    return config;
+                }
             }
+          
         }
         return null;
-    }
+    },
+    getAllCategoryDesc()
+    {
+        return this.descConfig.root.config;
+    },
+    getDesc(category)
+    {  
+        var cfg=this.descConfig.root.config[category];
+        var result="";
+        result+="总体特征:"+ cfg.desc1+"\n";
+        result+="形体特征:"+ cfg.desc2+"\n";
+        result+="常见表现:"+ cfg.desc3+"\n";
+        result+="心理特征:"+ cfg.desc4+"\n";
+        result+="发病倾向:"+ cfg.desc5+"\n";
+        result+="对外界环境适应能力:"+ cfg.desc6;
+        return result;
+    },
  });

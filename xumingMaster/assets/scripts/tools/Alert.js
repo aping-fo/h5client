@@ -145,12 +145,15 @@ cc.Class({
                 if(event.target.name == "enterButton"){
                     console.log("确认按钮");
                     if(self._enterCallBack){
+                    
                         self._enterCallBack();
+                        self.onDestory();
                     }
                 }else{
                     console.log("取消按钮");
+                    self.startFadeOut();
                 }
-                self.startFadeOut();
+               
             };
         
             // 销毁 alert 

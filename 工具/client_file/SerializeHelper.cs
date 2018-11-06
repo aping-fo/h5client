@@ -256,7 +256,7 @@ namespace Com.Game.ConfigData
         }
 
 		
-		public static int[] Get7BitEncodeInt1(BufferBuilder bb)
+		public static float[] GetFloat1(BufferBuilder bb)
 		{
 			if(bb.GetNullFlag())
 			{
@@ -265,17 +265,17 @@ namespace Com.Game.ConfigData
 			else
 			{
 				int length = bb.Get7BitEncodeInt();
-				int[] value = new int[length];
+				float[] value = new float[length];
 				for(int i=0;i<length;i++)
 				{
-					value[i] = bb.Get7BitEncodeInt();
+					value[i] = bb.GetFloat();
 				}
 				return value;
 			}
 		}
 
 		
-		public static void Put7BitEncodeInt1(BufferBuilder bb,int[] value)
+		public static void PutFloat1(BufferBuilder bb,float[] value)
 		{
 			if(!bb.PutNullFlag(value))
 			{
@@ -283,7 +283,7 @@ namespace Com.Game.ConfigData
 				bb.Put7BitEncodeInt(length);
 				for(int i=0;i<length;i++)
 				{
-					bb.Put7BitEncodeInt(value[i]);
+					bb.PutFloat(value[i]);
 				}
 			}
 		}
@@ -340,6 +340,39 @@ namespace Com.Game.ConfigData
             if(!bb.PutNullFlag(value))
                 value.Encode(bb);
         }
+
+		
+		public static int[] Get7BitEncodeInt1(BufferBuilder bb)
+		{
+			if(bb.GetNullFlag())
+			{
+				return null;
+			}
+			else
+			{
+				int length = bb.Get7BitEncodeInt();
+				int[] value = new int[length];
+				for(int i=0;i<length;i++)
+				{
+					value[i] = bb.Get7BitEncodeInt();
+				}
+				return value;
+			}
+		}
+
+		
+		public static void Put7BitEncodeInt1(BufferBuilder bb,int[] value)
+		{
+			if(!bb.PutNullFlag(value))
+			{
+				int length = value.Length;
+				bb.Put7BitEncodeInt(length);
+				for(int i=0;i<length;i++)
+				{
+					bb.Put7BitEncodeInt(value[i]);
+				}
+			}
+		}
 
 
 	}

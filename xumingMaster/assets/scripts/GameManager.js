@@ -8,6 +8,7 @@ var SelfTestModel = require("SelfTestModel");
 
 const LOCALSTORAGEKEY_BgmOn = "BgmOn";
 const LOCALSTORAGEKEY_ClipOn = "ClipOn";
+const LOCALSTORAGEKEY_HitoryQuestions = "HistoryQuestions";
 
 var GameManager = cc.Class({
     extends: cc.Component,
@@ -36,7 +37,8 @@ var GameManager = cc.Class({
         lauchOption: null,
         sceneGoingTo: null,
         sceneLoaded: [],
-        sceneLoading: []
+        sceneLoading: [],
+        testCategory:0,//体质测试选择的体质
 
     },
 
@@ -52,16 +54,41 @@ var GameManager = cc.Class({
         var clipOn = cc.sys.localStorage.getItem(LOCALSTORAGEKEY_ClipOn) == null || cc.sys.localStorage.getItem(LOCALSTORAGEKEY_ClipOn) == "" ? true : cc.sys.localStorage.getItem(LOCALSTORAGEKEY_ClipOn) == "true" ? true : false;
         this.setClipOn(clipOn);
 
+        this.bgMusic = null;
+        this.playerInfoPanel = null;
+        this.reviewPanel = null;
+        this.reviewNode = null;
         var _this = this;
-        this.playerInfoPrefab = null;
+
+        cc.loader.loadRes("music/bg", cc.AudioClip, function(err, audioClip){
+            if(err){
+                cc.error(err.message || err);
+                return;
+            }
+            _this.bgMusic = audioClip;
+            cc.audioEngine.play(audioClip, true);
+        });
 
         cc.loader.loadRes("prefabs/PlayerInfoPanel", cc.Prefab, function(err, prefab){
             if(err){
                 cc.error(err.message || err);
                 return;
             }
-
-            _this.playerInfoPrefab = prefab;
+            _this.playerInfoPanel = prefab;
+        });
+        cc.loader.loadRes("prefabs/ReviewPanel", cc.Prefab, function(err, prefab){
+            if(err){
+                cc.error(err.message || err);
+                return;
+            }
+            _this.reviewPanel = prefab;
+        });
+        cc.loader.loadRes("prefabs/ReviewNode", cc.Prefab, function(err, prefab){
+            if(err){
+                cc.error(err.message || err);
+                return;
+            }
+            _this.reviewNode = prefab;
         });
     },
     // onLoad () {},
@@ -96,15 +123,31 @@ var GameManager = cc.Class({
     },
     //请求匹配
     SendMatch(callback) {
-        var data = { nickName: GameManager.getInstance().myInfo['wxName'] };
+        var data = { nickName: GameManager.getInstance().myInfo['wxName']};
         httpReq.Post(CMD.START_MATCH, data, function (resp) {
             callback(resp);
         });
     },
+
+    //请求机器人匹配
+    SendRobotMatch(callback){    
+        var data = { nickName: GameManager.getInstance().myInfo['wxName'], iconUrl: "", single: true};
+        httpReq.Post(CMD.START_MATCH, data, function (resp) {
+            callback(resp);
+        });
+    },
+
     //取消匹配
     CancelMatch(callback) {
         var data = {};
         httpReq.Post(CMD.END_MATCH, data, function (resp) {
+            callback(resp);
+        });
+    },
+      //退出游戏
+      ExitGame(callback) {
+        var data = {};
+        httpReq.Post(CMD.EXIT_ROOM, data, function (resp) {
             callback(resp);
         });
     },
@@ -174,9 +217,9 @@ var GameManager = cc.Class({
             callback(resp);
         });
     },
-    //提交胜利
-    SubmitVictory(callback) {
-        var data = {};
+    //提交结果
+    SubmitResult(isWin, callback) {
+        var data = {isWin: isWin};
         httpReq.Post(CMD.SUBMIT_VICTORY, data, function (resp) {
             callback(resp);
         });
@@ -219,8 +262,8 @@ var GameManager = cc.Class({
     },
 
     //请求历史题库
-    GetHistoryQuestions(from, to, callback) {
-        var data = { from: from, to: to };
+    GetHistoryQuestions(callback) {
+        var data = {};
 
         httpReq.Post(CMD.GET_HISTORY_QUESTION, data, function (resp) {
             callback(resp);
@@ -228,8 +271,8 @@ var GameManager = cc.Class({
     },
 
     ///////////////////////// 排行榜 ///////////////////////////
-    OpenGlobalRank(from, to, callback) {
-        var data = { fromIndex: from, toIndex: to };
+    OpenGlobalRank(from, count, callback) {
+        var data = { fromIndex: from, toIndex: count };
         httpReq.Post(CMD.GET_RANK_INFO, data, function (resp) {
             console.log("GET_RANK_INFO ", resp);
 
@@ -247,7 +290,7 @@ var GameManager = cc.Class({
         var data = {};
         httpReq.Post(CMD.SIGN_UP_MASTERMATCH, data, callback);
     },
-    PreLoadScene(sceneName) {
+    PreLoadScene(sceneName,callback) {
         var self = GameManager.getInstance();
         if (self.sceneLoading == null) {
             self.sceneLoading = new Array();
@@ -263,6 +306,10 @@ var GameManager = cc.Class({
                     self.sceneLoading[i] = "";
                     break;
                 }
+            }
+            if(callback != null)
+            {
+                callback();
             }
             if (sceneName == self.sceneGoingTo) {
                 LoadingBar.hide();
@@ -309,6 +356,20 @@ var GameManager = cc.Class({
 
     isClipOn(){
         return this.m_clipOn;
+    },
+
+    getHistoryQuestionsUrl(){
+        var str = cc.sys.localStorage.getItem(LOCALSTORAGEKEY_HitoryQuestions);
+        if(str == null){
+            str = "";
+            cc.sys.localStorage.setItem(LOCALSTORAGEKEY_HitoryQuestions, str);
+        }
+
+        return str;
+    },
+
+    setHistoryQuestionsUrl(str){
+        cc.sys.localStorage.setItem(LOCALSTORAGEKEY_HitoryQuestions, str);
     }
 
 });

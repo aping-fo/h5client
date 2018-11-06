@@ -1,5 +1,6 @@
 var excerciseAni=require("excerciseAni")
 var chessAni=require("chessAni")
+var UIHelper = require("UIHelper");
 cc.Class({
     extends: cc.Component,
 
@@ -10,7 +11,17 @@ cc.Class({
             serializable: true,   
         },
         btns:[cc.Node],
-        btn_selected:null
+        btn_selected:null,
+
+        sprite: {
+            type: cc.Sprite,
+            default: null
+        },
+        
+        captureNode: {
+            type:cc.Node,
+            default: null
+        }
     },
 
 
@@ -28,15 +39,15 @@ cc.Class({
         // excerciseAni.init(exBg,exTitleBg,exTitle,answers)
         // excerciseAni.action();
 
-        var chessBg=cc.find("Canvas/chessboard/board")
-        var grid=new Array();
-        for(var i=1;i<=9;i++)
-        {
-            var itemPath="Canvas/chessboard/group/"+i;
-            grid.push(cc.find(itemPath))
-        }
-        chessAni.init(chessBg,grid)
-        chessAni.action();
+        // var chessBg=cc.find("Canvas/chessboard/board")
+        // var grid=new Array();
+        // for(var i=1;i<=9;i++)
+        // {
+        //     var itemPath="Canvas/chessboard/group/"+i;
+        //     grid.push(cc.find(itemPath))
+        // }
+        // chessAni.init(chessBg,grid)
+        // chessAni.action();
 
 
         // var actionFadeIn=cc.sequence(cc.scaleTo(0.3, 1.1).easing(cc.easeIn(2.0)), cc.scaleTo(.1, 1.0), null);
@@ -74,7 +85,21 @@ cc.Class({
                 
         //     }, self);
         // }
-      
         
+        for(var i = 0; i < this.btns.length; i++){
+            this.btns[i].on("click", this.onBtnClick, this);
+        }
     },
+
+    onBtnClick(btn){
+        var path = UIHelper.SaveNodeRender(this.captureNode, 750, true);
+        var _this = this;
+        cc.loader.load(path, function(err, texture) {
+          if (err) {
+            cc.error(err.Message || err);
+            return;
+          }
+          _this.sprite.spriteFrame = new cc.SpriteFrame(texture);
+        });
+    }
 });

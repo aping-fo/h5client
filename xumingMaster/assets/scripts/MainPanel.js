@@ -24,7 +24,7 @@ cc.Class({
             default: null
         },
 
-        normalPanel: {
+        arenaPanel: {
             type: cc.Node,
             default: null
         },
@@ -34,13 +34,18 @@ cc.Class({
             default: null
         },
 
-        toggleContainer: {
-            type: cc.ToggleContainer,
+        reviewPanel: {
+            type: cc.Node,
             default: null
         },
 
-        enterBtn: {
-            type: cc.Button,
+        testPanel: {
+            type: cc.Node,
+            default: null
+        },
+
+        toggleContainer: {
+            type: cc.ToggleContainer,
             default: null
         }
     },
@@ -51,7 +56,7 @@ cc.Class({
         _this = this;
         GameManager.getInstance().oppInfo=null;
         WXTool.getInstance().wxOnShow(function(res){
-            var lauchOption= res.query;
+            var lauchOption= res;
             _this.CheckJoin(lauchOption);
         });
 
@@ -59,8 +64,6 @@ cc.Class({
         for(var i = 0; i < this.toggleContainer.toggleItems.length; i++){
             this.toggleContainer.toggleItems[i].node.on("toggle", this.onToggleBtnClick, this);
         }
-        //enter btn
-        this.enterBtn.node.on("click", this.onEnterBtnClick, this);
         
         //info btn
         this.infoNode.on("click", this.onInfoNodeClick, this);
@@ -73,17 +76,25 @@ cc.Class({
         var lauchOption=GameManager.getInstance().lauchOption;//启动参数
         this.CheckJoin(lauchOption);
     
-        this.updateMyInfo();
         this.toggleContainer.toggleItems[2].check();
+
+        this.node.getComponent(cc.Animation).play();
+        
+        this.updateMyInfo();
+
+        var _this = this;
+        GameManager.getInstance().GetRoleInfo(function(resp){
+            _this.updateMyInfo(resp);
+        });
     },
     CheckJoin(lauchOption)//检查是否被邀请进入战斗
     {
-        if(lauchOption == null)
+        if(lauchOption == null || lauchOption.query == null)
         {
             
         }
         else{//卡片启动流程
-            var roomId=lauchOption.roomId;
+            var roomId=lauchOption.query.roomId;
             console.log("roomId:"+roomId)
             if(roomId != null)
             {
@@ -119,117 +130,207 @@ cc.Class({
        
     },
     
-    updateMyInfo(){
+    updateMyInfo(resp){
         this.infoNode.getChildByName("lb_name").getComponent(cc.Label).string = GameManager.getInstance().myInfo.wxName;      
-        UIHelper.SetImageFromUrl(cc.find('mask/img_avatar',this.infoNode).getComponent(cc.Sprite), GameManager.getInstance().myInfo.iconUrl, true);
+        UIHelper.SetImageFromUrl(this.infoNode.getChildByName("img_avatar").getComponent(cc.Sprite), GameManager.getInstance().myInfo.iconUrl, true);
+
+        if(resp != null){
+            this.infoNode.getChildByName("lb_level").getComponent(cc.Label).string = "LV." + resp["level"];
+
+            var _this = this;
+            cc.loader.loadRes("texture/level/" + resp["level"], cc.SpriteFrame, function(err, spriteFrame){
+                if(err){
+                    cc.error(err.message || err);
+                    return;
+                }
+                _this.infoNode.getChildByName("img_title").getComponent(cc.Sprite).spriteFrame = spriteFrame;
+            });
+
+            if(resp["levelUpExp"] == 0){
+                this.infoNode.getChildByName("expProgress").getComponent(cc.ProgressBar).progress = 1;
+            }else{
+                this.infoNode.getChildByName("expProgress").getComponent(cc.ProgressBar).progress = resp["exp"] / resp["levelUpExp"];
+            }
+        }
     },
 
     onToggleBtnClick(toggle){
-        var titleStr = "";
-        var iconImg = "";
-        var btnStr = "";
+
+        // var titleStr = "";
+        // var iconImg = "";
+        // var btnStr = "";
+        this.arenaPanel.active = false;
+        this.rankPanel.active = false;
+        this.reviewPanel.active = false;
+        this.testPanel.active = false;
+        this.infoNode.active = true;
 
         switch(toggle.node.name){
             case "arenaToggle":
-                titleStr = "竞技场";
-                iconImg = "texture/main/arena";
-                btnStr = "进入房间";
+                // titleStr = "竞技场";
+                // iconImg = "texture/main/arena";
+                // btnStr = "进入房间";
+                this.arenaPanel.active = true;
+                this.arenaPanel.getComponent(cc.Animation).playAdditive("main_arena_show");
                 break;
 
             case "rankToggle":
+                this.infoNode.active = false;
+                this.rankPanel.active = true;
                 break;
 
             case "testToggle":
-                titleStr = "体质自测";
-                iconImg = "texture/main/test";
-                btnStr = "进行自测";
+                // titleStr = "体质自测";
+                // iconImg = "texture/main/test";
+                // btnStr = "进行自测";
+                this.testPanel.active = true;
+                this.testPanel.getComponent(cc.Animation).playAdditive("main_test_show");
                 break;
 
             case "reviewToggle":
-                titleStr = "知识回顾";
-                iconImg = "texture/main/review";
-                btnStr = "确定";
+                this.reviewPanel.active = true;
+                this.reviewPanel.getComponent(cc.Animation).playAdditive("main_review_show");
+
+                // titleStr = "知识回顾";
+                // iconImg = "texture/main/review";
+                // btnStr = "确定";
                 break;
 
             case "inviteToggle":
-                titleStr = "好友邀请";
-                iconImg = "texture/main/invite";
+                // titleStr = "好友邀请";
+                // iconImg = "texture/main/invite";
                 break;
         }
 
         
-        if(toggle.node.name == "rankToggle"){
-            this.normalPanel.active = false;
-            this.rankPanel.active = true;
-        }else{
-            this.normalPanel.active = true;
-            this.rankPanel.active = false;
-        }
+        // if(toggle.node.name == "rankToggle"){
+        //     this.normalPanel.active = false;
+        //     this.rankPanel.active = true;
+        // }else{
+        //     this.normalPanel.active = true;
+        //     this.rankPanel.active = false;
+        // }
 
-        this.normalPanel.getChildByName("title").getChildByName("lb_name").getComponent(cc.Label).string = titleStr;
-        this.normalPanel.getChildByName("btn_enter").getChildByName("lb_content").getComponent(cc.Label).string = btnStr;
-        UIHelper.SetImageFromUrl(this.normalPanel.getChildByName("icon").getChildByName("img_icon").getComponent(cc.Sprite), iconImg, false);
-
-
-
-        for(var i = 0; i < this.toggleContainer.toggleItems.length; i++){
-            if(this.toggleContainer.toggleItems[i].isChecked){
-                this.toggleContainer.toggleItems[i].node.scale = new cc.Vec2(1.3, 1.3);
-            }else{
-                this.toggleContainer.toggleItems[i].node.scale = cc.Vec2.ONE;
-            }
-        }
+        // this.normalPanel.getChildByName("title").getChildByName("lb_name").getComponent(cc.Label).string = titleStr;
+        // this.normalPanel.getChildByName("btn_enter").getChildByName("lb_content").getComponent(cc.Label).string = btnStr;
+        // UIHelper.SetImageFromUrl(this.normalPanel.getChildByName("icon").getChildByName("img_icon").getComponent(cc.Sprite), iconImg, false);
     },
 
-    onEnterBtnClick(btn){
-        for(var i = 0; i < this.toggleContainer.toggleItems.length; i++){
-            if(this.toggleContainer.toggleItems[i].isChecked){
-                switch(this.toggleContainer.toggleItems[i].node.name){
-                    case "arenaToggle":
-                        GameManager.getInstance().SendMatch(function(resp)
-                        {
-                            _this.onSendMatchBack(resp);
-                        }); 
-                        break;
+    onArenaBtnClick(btn){
+        console.log("arena click");
+        var _this = this;
+        GameManager.getInstance().SendMatch(function(resp)
+        {
+            _this.onSendMatchBack(resp);
+        }); 
+    },
 
-                    // case "rankToggle":
-                    //     cc.director.loadScene("rank", function(){
+    onFightFriendBtnClick(btn){
+        console.log("fight friend click");
 
-                    //     });
-                    //     break;
+    },
 
-                    case "testToggle":
-                        break;
+    onMasterBtnClick(btn){
+        console.log("master click");
 
-                    case "reviewToggle":
-                        cc.director.loadScene("review", function(){
-                
-                        });
-                        break;
+    },
 
-                    case "inviteToggle":
-                        GameManager.getInstance().CreateRoom(function(resp){
-                            var roomId = resp;
-                            console.log("roomId  "+roomId)
-                            GameManager.getInstance().gameState = gameEnum.GAME_STATE.WAITING_OPPONENT;
-                            WXTool.getInstance().shareToPlayTogether(roomId,function(){
-                                GameManager.getInstance().LoadScene("matching");
-                            });
-                        }); 
-                        break;
-                }
-            }
+    onSingleBtnClick(btn){
+        console.log("Single click");
+        var _this = this;
+        GameManager.getInstance().SendRobotMatch(function(resp)
+        {
+            _this.onSendMatchBack(resp);
+        }); 
+    },
+
+    onReviewTestBtnClick(btn){
+        console.log("review test click");
+    },
+
+    onReviewQuestionBtnClick(btn){
+        console.log("review questions click");
+
+        var reviewPanel = cc.Canvas.instance.node.getChildByName("ReviewPanel");
+        if(reviewPanel == null){
+            reviewPanel = cc.instantiate(GameManager.getInstance().reviewPanel);
+            reviewPanel.setParent(cc.Canvas.instance.node);
         }
+
+        reviewPanel.active = true;
+    },
+
+    onReviewArenaBtnClick(btn){
+        console.log("review arena click");
+
+    },
+
+    onReviewMasterBtnClick(btn){
+        console.log("review master click");
+
     },
 
     onInfoNodeClick(btn){
         var playerInfoPanelNode = cc.Canvas.instance.node.getChildByName("PlayerInfoPanel");
         if(playerInfoPanelNode == null){
-            playerInfoPanelNode = cc.instantiate(GameManager.getInstance().playerInfoPrefab);
+            playerInfoPanelNode = cc.instantiate(GameManager.getInstance().playerInfoPanel);
             playerInfoPanelNode.setParent(cc.Canvas.instance.node);
         }
 
         playerInfoPanelNode.active = true;
+    },
+
+    // onEnterBtnClick(btn){
+    //     for(var i = 0; i < this.toggleContainer.toggleItems.length; i++){
+    //         if(this.toggleContainer.toggleItems[i].isChecked){
+    //             switch(this.toggleContainer.toggleItems[i].node.name){
+    //                 case "arenaToggle":
+    //                     GameManager.getInstance().SendMatch(function(resp)
+    //                     {
+    //                         _this.onSendMatchBack(resp);
+    //                     }); 
+    //                     break;
+
+    //                 // case "rankToggle":
+    //                 //     cc.director.loadScene("rank", function(){
+
+    //                 //     });
+    //                 //     break;
+
+    //                 case "testToggle":
+    //                 cc.director.loadScene("examOnly", function(){
+                
+    //                 });
+    //                     break;
+
+    //                 case "reviewToggle":
+    //                     cc.director.loadScene("review", function(){
+                
+    //                     });
+    //                     break;
+
+    //                 case "inviteToggle":
+    //                     GameManager.getInstance().CreateRoom(function(resp){
+    //                         var roomId = resp;
+    //                         console.log("roomId  "+roomId)
+    //                         GameManager.getInstance().gameState = gameEnum.GAME_STATE.WAITING_OPPONENT;
+    //                         WXTool.getInstance().shareToPlayTogether(roomId,function(){
+    //                             GameManager.getInstance().LoadScene("matching");
+    //                         });
+    //                     }); 
+    //                     break;
+    //             }
+    //         }
+    //     }
+    // },
+    //自测分类按钮点击
+    onTestBtnClick(event)
+    {
+        var category=parseInt(event.target.name.split("_")[1])-1;
+        GameManager.getInstance().testCategory=category;
+        cc.director.loadScene("examOnly", function(){
+                
+        });
     }
 
 });

@@ -6,6 +6,7 @@
 var WXTool = require("WXTool")
 var GameManager = require("GameManager");
 var httpReq=require('HttpReq');
+var LoadingBar = require('LoadingBar');
 
 
 cc.Class({
@@ -28,13 +29,31 @@ cc.Class({
     onLoad () {
         cc.director.on("WXLoginSuccess", this.onWXLoginSuccess, this);
         GameManager.getInstance().lauchOption= WXTool.getInstance().getLaunchOptionsSync();//启动参数
-        console.log("lauchOption:"+GameManager.getInstance().lauchOption) 
+        console.log("lauchOption:", GameManager.getInstance().lauchOption) 
 
         this.loginBtn.node.on("click", this.onLoginBtnClick, this);
     },
 
     start () {
-        GameManager.getInstance().PreLoadScene("main");
+        var _this=this;
+        var isLoaded=false;
+        var isTimeOut=false;
+        LoadingBar.show();
+        //确保一秒后才移除loading避免闪屏
+        _this.scheduleOnce(function() {
+            isTimeOut=true;
+            if(isLoaded)
+            {
+                LoadingBar.hide();
+            }           
+       }, 1);
+        GameManager.getInstance().PreLoadScene("main",function(){
+            isLoaded=true;
+            if(isTimeOut)
+            {
+                LoadingBar.hide();
+            }
+        });
     },
 
     // update (dt) {},

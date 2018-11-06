@@ -5,6 +5,7 @@ var GAME_STATE = cc.Enum({
     EXCERCISES:3,
     WATCHING:4,
     WAITING_OPPONENT:5,//等待对手
+    END:6,//游戏结束
 });
 var GameConst ={
     INTERVAL_MATCHING:0.5,//匹配轮询间隔
@@ -17,7 +18,8 @@ var GameConst ={
     DELAY_SHOW_GAME_RESULT:2,
     ANSWER_TIME:20,//答题时间
     GRAB_WAIT_time:3,//抢答等待时间
-    GRAB_AUTO_time:3,//自动抢答时间
+    GRAB_AUTO_time:3,//自动抢答时间,
+    SELF_TEST_ROUND:10,//自测总轮数
 };
 module.exports = {
     GAME_STATE: GAME_STATE,

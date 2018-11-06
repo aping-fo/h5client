@@ -40,6 +40,8 @@ var CMD = cc.Enum({
     ROBOT_ROB_ANSWER:2015,
     //机器人答题
     ROBOT_ANSWER_QUEST: 2016,
+      //退出战斗
+      EXIT_ROOM: 2017,
 
     //请求历史题库
     GET_HISTORY_QUESTION: 3000,

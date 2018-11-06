@@ -22,7 +22,7 @@ cc.Class({
         },
         chessGroup: {
             default: null,                                  
-            type: cc.Layout, 
+            type: cc.Node, 
             serializable: true,   
         },
         atlas:
@@ -90,6 +90,7 @@ cc.Class({
 
     onLoad () {
         this.isGrab=false;
+        this.black.node.active=false;
         this.winAni.node.active=false;
         this.winAni2.node.active=false;
         this.winArr=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
@@ -102,7 +103,7 @@ cc.Class({
         {
             var chess=cc.instantiate(this.chessPrefab).getComponent(Chess);
             chess.lbl_catergory.string="";
-            chess.node.parent=this.chessGroup.node;
+            chess.node.parent=this.chessGroup;
             this.chesses.push(chess);
         }
         this.grabBtn.node.on("click", this.onChessClick, this);
@@ -142,11 +143,14 @@ cc.Class({
         // this.chesses[GameManager.getInstance().curQuestionIdx].sp_state.spriteFrame=this.atlas.getSpriteFrame("what");
         this.black.node.active=true;
         hightLightChess=cc.instantiate(this.chesses[GameManager.getInstance().curQuestionIdx].node);
-        hightLightChess.getComponent(cc.Animation).stop();
-        var sprite= hightLightChess.getComponent(cc.Sprite);
-        sprite.spriteFrame=this.chesses[0].getComponent(cc.Sprite).spriteFrame;
+        // hightLightChess.getComponent(cc.Animation).stop();
+        // var sprite= hightLightChess.getComponent(cc.Sprite);
+        // sprite.spriteFrame=this.chesses[0].getComponent(cc.Sprite).spriteFrame;
         hightLightChess.on("click", this.onChessClick, this);
         hightLightChess.parent=this.node;
+        var pos=this.chesses[GameManager.getInstance().curQuestionIdx].node.getPosition();
+        pos.y=pos.y+this.chessGroup.getPosition().y;
+        hightLightChess.position=pos;
         chessAni.actionHightLight(this.black.node,hightLightChess,this.grabBtn);
         th.countDown.node.active=true; 
         th.countDown.startCountDown(gameEnum.GameConst.GRAB_WAIT_time+1,function(){
@@ -279,8 +283,8 @@ cc.Class({
                     var scale=winAniPosArr[i][4];
                     ani.node.setScale(scale);
                 }
-                ani.node.active=true;
-                ani.playAdditive("WinAnim");
+                // ani.node.active=true;
+                // ani.playAdditive("WinAnim");
                 th.grabBtn.node.active=false;
                 if(name == 'co')
                 {

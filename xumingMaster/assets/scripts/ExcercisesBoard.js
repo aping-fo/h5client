@@ -37,7 +37,6 @@ cc.Class({
     },
     OnNext(data)
     {
-        var data=GameManager.getInstance().questions[GameManager.getInstance().curQuestionIdx];
         this.title.string=data['content'];
         var length=this.answers.length;
         for(var i=0;i<length;i++)
@@ -61,7 +60,7 @@ cc.Class({
         {
             var sign=isRight?this.sign_right.node:this.sign_wrong.node;
             sign.active=true;
-            var pos=cc.p(196,143-132*idx)
+            var pos=cc.p(196,86-139*idx)
             sign.position =pos;
         }     
     },

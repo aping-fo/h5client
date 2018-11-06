@@ -9,6 +9,10 @@
   "collision-matrix": [
     [
       true
+    ],
+    [
+      false,
+      false
     ]
   ],
   "design-resolution-height": 1334,
@@ -17,7 +21,8 @@
   "fit-height": true,
   "fit-width": true,
   "group-list": [
-    "default"
+    "default",
+    "CaptureScreen"
   ],
   "simulator-orientation": false,
   "simulator-resolution": {

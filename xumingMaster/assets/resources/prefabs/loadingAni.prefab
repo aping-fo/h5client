@@ -24,7 +24,7 @@
       }
     ],
     "_active": true,
-    "_level": 2,
+    "_level": 1,
     "_components": [],
     "_prefab": {
       "__id__": 8
@@ -163,7 +163,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "74NVi4bFtA45gn1WVYZT5s"
+    "_id": "e63Anu2JdLp5ky7AfBLD4n"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -171,7 +171,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "4de56bc3-ab6d-4359-adec-928a2128ec64"
     },
     "fileId": "87gGrTo7RM2p+GrFqHRxyX",
     "sync": false
@@ -260,9 +260,9 @@
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "仿宋",
+    "_N$fontFamily": "隶书",
     "_N$overflow": 0,
-    "_id": "59KXTnyOJHzqC7JcZWecVI"
+    "_id": "f9O8kxLdRKRLnFCeTdGx9o"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -270,7 +270,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "4de56bc3-ab6d-4359-adec-928a2128ec64"
     },
     "fileId": "28Yc/wuLBC2oUf7m0Mo5vy",
     "sync": false
@@ -281,7 +281,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "4de56bc3-ab6d-4359-adec-928a2128ec64"
     },
     "fileId": "dfsxjOH8RJqK0HLMY28LEO",
     "sync": false

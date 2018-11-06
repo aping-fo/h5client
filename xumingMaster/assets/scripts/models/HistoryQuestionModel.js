@@ -19,24 +19,33 @@ var HistoryQuestionModel = cc.Class({
     },
 
     properties: {
-        cacheCount: 72, //缓存数量
-        datas: []
+        cacheCount: 5, //缓存数量
     },
 
-    getData(from, to, callback) {
-        if (from >= this.cacheCount) {
-            return;
-        }
-
-        //请求数据
-        GameManager.getInstance().GetHistoryQuestions(from, to, function(res){
-            console.log(res);
-
-            for (var i = from, j = 0; i <= to; i++ , j++) {
-                _this.datas[i] = res.questions[j];
+    getDatas(callback){
+        GameManager.getInstance().GetHistoryQuestions(function(resp){
+            if(callback){
+                callback(resp);
             }
-
-            callback(_this.datas, from, to);
         });
+    },
+
+    getImageUrl() {
+        var str = GameManager.getInstance().getHistoryQuestionsUrl();
+        var urls = str.split(",");
+
+        return urls;
+    },
+
+    addImageUrl(url){
+        var str = GameManager.getInstance().getHistoryQuestionsUrl();
+        var urls = str.split(",");
+
+        if(urls.length >= this.cacheCount){
+            urls.shift();
+        }
+        urls.push(url);
+
+        GameManager.getInstance().setHistoryQuestionsUrl(urls.join(','));
     }
 });

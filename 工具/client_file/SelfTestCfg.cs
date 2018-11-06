@@ -12,7 +12,7 @@ namespace Com.Game.ConfigData
 		public string contentImgUrl;//题目图片路径
 		public string[] options;//选项
 		public ObscuredInt catergory;//分类
-		public int[] score;//得分
+		public float[] score;//得分
 
 		public SelfTestCfg()
 		{
@@ -25,7 +25,7 @@ namespace Com.Game.ConfigData
 			contentImgUrl = bb.GetString();
 			options = SerializeHelper.GetString1(bb);
 			catergory = bb.Get7BitEncodeInt();
-			score = SerializeHelper.Get7BitEncodeInt1(bb);
+			score = SerializeHelper.GetFloat1(bb);
 
 			if (DeserializeHelper.OnSelfTestCfgDecode != null)
 			{
@@ -40,7 +40,7 @@ namespace Com.Game.ConfigData
 			bb.PutString(contentImgUrl);
 			SerializeHelper.PutString1(bb,options);
 			bb.Put7BitEncodeInt(catergory);
-			SerializeHelper.Put7BitEncodeInt1(bb,score);
+			SerializeHelper.PutFloat1(bb,score);
 		}
 
 		public int GetId()

@@ -1,4 +1,7 @@
 var GameManager=require("GameManager");
+var HistoryQuestionModel = require("HistoryQuestionModel");
+var ReviewNode = require("ReviewNode");
+
 cc.Class({
     extends: cc.Component,
 
@@ -18,6 +21,11 @@ cc.Class({
             type: cc.Node, 
             serializable: true,   
         },
+
+        // node_review: {
+        //     type: ReviewNode,
+        //     default: null
+        // }
     },
 
 
@@ -36,6 +44,22 @@ cc.Class({
     {
         this.node_win.active=result;
         this.node_lose.active=!result;
+        this.saveHistoryQuestions();
+    },
+
+    saveHistoryQuestions(){
+        var _this = this;
+        var reviewNode = cc.find("ReviewNode", cc.Canvas.instance.node);
+
+        if(reviewNode == null){
+            reviewNode = cc.instantiate(GameManager.getInstance().reviewNode);
+            reviewNode.setParent(cc.Canvas.instance.node);
+        }
+        
+        HistoryQuestionModel.getInstance().getDatas(function(resp){
+            console.log("HistoryQuestionModel", resp);
+            reviewNode.getComponent(ReviewNode).saveImageWithDatas(resp.questions);
+        });
     }
     // update (dt) {},
 });

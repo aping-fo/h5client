@@ -8,11 +8,11 @@ var appScript = {
     action:function()
     {
         var self=this;
-        for(var i=0;i<self.grid.length;i++)
-        {
-            self.grid[i].setScale(0);
-        }
-        self.bg.setScale(0.3);
+        // for(var i=0;i<self.grid.length;i++)
+        // {
+        //     self.grid[i].setScale(0);
+        // }
+        // self.bg.setScale(0.3);
         var delayTime=0;
         self.cbAction2=function(){
             if(self.finishCallback != null)
@@ -27,7 +27,7 @@ var appScript = {
             {
                 var row=Math.floor(i/3);
                 var col=i%3;
-                self.grid[i].position = cc.p(-203+204*col,205-199*row);
+                self.grid[i].position = cc.p(-196+196*col,-21.5-275*row-300);
                 delayTime+=0.1;
                 var cb=(i == self.grid.length-1)?actionCb2:null;
                 var action=cc.sequence(cc.delayTime(delayTime), cc.scaleTo(.2, 1.0),cc.callFunc(function(){
@@ -51,13 +51,38 @@ var appScript = {
             self.bg.runAction(actionFadeIn);
         };
 
-        self.fadeInGrid=function(grid,action)
+        var actionFadeGrid=[];
+        for(var i=0;i<self.grid.length;i++)
         {
-            cc.eventManager.pauseTarget(grid, true);      
-            grid.runAction(action);
+            var row=Math.floor(i/3);
+            var col=i%3;
+            var px=-196+196*col;
+            var py=-21.5-275*row-500;
+            var cb=(i == self.grid.length-1)?cc.callFunc(function(){
+                if(self.finishCallback != null)
+                {
+                    self.finishCallback();
+                }
+            },self):null;
+            actionFadeGrid.push(cc.sequence(cc.delayTime(0.1*i),cc.spawn(cc.fadeTo(0.6, 255),cc.moveTo(0.6,cc.p(px,py+500)).easing(cc.easeOut(2.0)),null), cb))
+        }
+        self.fadeInGrid=function()
+        {
+            for(var i=0;i<self.grid.length;i++)
+            {
+                var row=Math.floor(i/3);
+                var col=i%3;
+                var px=-196+196*col;
+                var py=-21.5-275*row-500;
+                self.grid[i].position = cc.p(px,py);
+                self.grid[i].opacity=0;
+                // cc.eventManager.pauseTarget(self.grid[i], true);      
+                self.grid[i].runAction(actionFadeGrid[i]);
+            }
+           
         };
      
-        self.fadeIn();
+        self.fadeInGrid();
     },
 
     actionHightLight(black,target,grabBtn)
@@ -68,7 +93,7 @@ var appScript = {
         var cb=cc.callFunc(function(){
             grabBtn.node.active=true;
         },self)
-        var actionFadeInBlack=cc.sequence(cc.fadeTo(0.2, 255), cb);
+        var actionFadeInBlack=cc.sequence(cc.fadeTo(0.2, 175), cb);
         var actionFadeInTarget=cc.sequence(cc.scaleTo(0.2, 1.2), null);
         self.fadeInBlack=function()
         {

@@ -1,0 +1,129 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "main_arena_show",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 3.5166666666666666,
+  "sample": 60,
+  "speed": 2,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "title": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 0
+            },
+            {
+              "frame": 2.0166666666666666,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "icon": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 255
+            }
+          ],
+          "y": [
+            {
+              "frame": 0,
+              "value": -182
+            },
+            {
+              "frame": 1.0166666666666666,
+              "value": 11
+            }
+          ]
+        }
+      },
+      "buttons/btn_arena": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 1.5,
+              "value": 0
+            },
+            {
+              "frame": 2.0166666666666666,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "buttons/btn_friend": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 2.0166666666666666,
+              "value": 0
+            },
+            {
+              "frame": 2.5166666666666666,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "buttons/btn_master": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 2.5166666666666666,
+              "value": 0
+            },
+            {
+              "frame": 3,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "buttons/btn_single": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 0
+            },
+            {
+              "frame": 3,
+              "value": 0
+            },
+            {
+              "frame": 3.5166666666666666,
+              "value": 255
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

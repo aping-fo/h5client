@@ -1,6 +1,6 @@
 {
   "ver": "2.2.0",
-  "uuid": "82bbc8c4-f74c-4481-a5f8-81bbcd5a17a4",
+  "uuid": "944433c2-f275-4bb3-92fa-933b7d636088",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -8,8 +8,8 @@
   "subMetas": {
     "ChessAppear": {
       "ver": "1.0.3",
-      "uuid": "4a9ab6da-9deb-4c32-bacd-3121eaf5a2c8",
-      "rawTextureUuid": "82bbc8c4-f74c-4481-a5f8-81bbcd5a17a4",
+      "uuid": "1e6e6250-861f-46ba-a7b5-c1c7e763c1e3",
+      "rawTextureUuid": "944433c2-f275-4bb3-92fa-933b7d636088",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

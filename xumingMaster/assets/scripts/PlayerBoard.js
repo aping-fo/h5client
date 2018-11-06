@@ -67,7 +67,8 @@ cc.Class({
         isTimeCountStart:false,
         timeTotal:0,
         timeCount:0,
-        timeCountTarget:null
+        timeCountTarget:null,
+        timeCountLbl:null
     },
 
 
@@ -110,6 +111,7 @@ cc.Class({
     startTimeCount(target,total,callback)
     {
         this.timeCountTarget=target;
+        this.timeCountLbl=cc.find("lbl",this.timeCountTarget.node).getComponent(cc.Label);
         this.timeTotal=total;
         this.isTimeCountStart=true;
         this.timeCount=0;
@@ -127,7 +129,8 @@ cc.Class({
         if(this.isTimeCountStart)
         {
             this.timeCount+=dt;
-            this.timeCountTarget.progress=(this.timeTotal-this.timeCount)/this.timeTotal;
+            this.timeCountTarget.progress=this.timeCount/this.timeTotal;
+            this.timeCountLbl.string=parseInt(this.timeTotal-this.timeCount+1);
             if(this.timeCount>= this.timeTotal)
             {
                 this.isTimeCountStart=false;

@@ -4,14 +4,15 @@ var errorCount=0;
 var Base64 = require("Base64");
 var md5=require("md5");
 var appScript = {
-    url: "http://192.168.0.116:8446/medicine",
+    // url: "http://192.168.0.116:8446/medicine",
     // url: "https://mary101.luckygz.com:8445/medicine",
     // url: "https://wcgame.luckygz.com:8445/medicine",
     // url: "http://192.168.0.156:8129/medicine",
-    // url: "http://127.0.0.1:8129/medicine",
+    url: "http://127.0.0.1:8129/medicine",
     version: "1.0.0",   
     secret:'cJpSzEU0KcWybxhkKp47DSvUZTpgfEAuht72XHiL',
     openId:0,
+    oppExitCallback:null,//对手退出
     Get: function(url,reqData,callback){
         var self = this;
 
@@ -43,6 +44,7 @@ var appScript = {
         url=self.ip + url;
         xhr.open("GET", url, true);
         xhr.send();
+        
     },
 
     Post: function (cmd, reqData, callback) {
@@ -52,7 +54,6 @@ var appScript = {
             Alert.show("失去连接，是否重连",function(){
                 errorCount=0;
                 WXTool.getInstance().reset();
-                Alert.onDestory();
                 cc.director.loadScene("begin", function(){
                 });
             },function(){},"",0.3)
@@ -88,6 +89,13 @@ var appScript = {
                         {
                             var data=JSON.parse(responseJson['data']);
                             callback(data);
+                        }
+                        else if(responseJson['code'] == '510')
+                        {
+                            if(self.oppExitCallback != null)
+                            {
+                                self.oppExitCallback();
+                            }
                         }
                         else
                         {
